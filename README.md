@@ -16,7 +16,7 @@ $ cd tassarim
 2) Edit ViewController.swift & URList files.
 
 ![](Screenshots/dribbble1.png)
-![](Screenshots/dribbble2.jpg)
+![](Screenshots/dribbble2.png)
 
 4) Edit your Google Analytics info (Optional)
 
