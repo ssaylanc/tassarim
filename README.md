@@ -17,12 +17,12 @@ $ git clone https://github.com/ssaylanc/tassarim.git
 $ cd tassarim
 ```
     
-2) Edit ViewController.swift & URList files.
+2) Edit ViewController.swift & URList files. You need to register your app at [Dribbble Developer Portal](http://developer.dribbble.com)
 
 ![](Screenshots/dribbble1.png)
 ![](Screenshots/dribbble2.png)
 
-4) Edit your Google Analytics info (Optional)
+4) (Optional) Edit your Google Analytics info, TRACKING_ID, GOOGLE_APP_ID 
 
 ![](Screenshots/google.png)
 
