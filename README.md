@@ -4,6 +4,10 @@
 
 Open Source [Dribbble iOS client](https://itunes.apple.com/tr/app/tassarim/id1192816659?mt=8) for [Dribbble](www.dribbble.com), by the creator of [Makale App](https://itunes.apple.com/tr/app/makale-app/id1018812586?mt=8).
 
+# Desing
+
+Sketh file is in the Design folder. You it as you like.
+
 ## Usage
 
 1) Download the repository
@@ -37,14 +41,14 @@ $ open tassarim.xcodeproj
 
 # Credits
 
-- [Alamofire]() Elegant HTTP Networking in Swift
-- [OAuthSwift][] Swift based OAuth library for iOS
-- [Spring][] for code-less animation
-- [BTNavigationDropdownMenu][] The elegant dropdown menu, written in Swift, appears underneath navigation bar to display a list of related items when a user click on the navigation title.
-- [UIColor_Hex_Swift][] Convenience methods for creating color using RGBA hex string.
-- [NVActivityIndicatorView][] Collection of awesome loading animations
-- [Gifu][] High-performance animated GIF support for iOS in Swift
-- [Haneke][] A lightweight zero-config image cache for iOS, in Objective-C.
-- [SDWebImage][] Asynchronous image downloader with cache support as a UIImageView category
-- [RandomColorSwift][] An attractive color generator for Swift. Ported from randomColor.js.
-- [ChameleonFramework/Swift][] Chameleon is a lightweight, yet powerful, flat color framework for iOS
+- [Alamofire](https://github.com/Alamofire/Alamofire) Elegant HTTP Networking in Swift
+- [OAuthSwift](https://github.com/OAuthSwift/OAuthSwift) Swift based OAuth library for iOS
+- [Spring](https://github.com/MengTo/Spring) A library to simplify iOS animations in Swift
+- [BTNavigationDropdownMenu](https://github.com/PhamBaTho/BTNavigationDropdownMenu) The elegant dropdown menu, written in Swift, appears underneath navigation bar to display a list of related items when a user click on the navigation title.
+- [UIColor_Hex_Swift](https://github.com/yeahdongcn/UIColor-Hex-Swift) Convenience methods for creating color using RGBA hex string.
+- [NVActivityIndicatorView](https://github.com/ninjaprox/NVActivityIndicatorView) Collection of awesome loading animations
+- [Gifu](https://github.com/kaishin/Gifu) High-performance animated GIF support for iOS in Swift
+- [Haneke](https://github.com/Haneke/Haneke) A lightweight zero-config image cache for iOS, in Objective-C.
+- [SDWebImage](https://github.com/rs/SDWebImage) Asynchronous image downloader with cache support as a UIImageView category
+- [RandomColorSwift](https://github.com/onevcat/RandomColorSwift) An attractive color generator for Swift. Ported from randomColor.js.
+- [ChameleonFramework/Swift](https://github.com/GavinZw/ChameleonFramework) Chameleon is a lightweight, yet powerful, flat color framework for iOS
