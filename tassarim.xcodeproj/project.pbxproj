@@ -1,0 +1,895 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23AA6D4B561D318C871D0D9B /* Pods_tassarim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2CB7A79B990A2612085355 /* Pods_tassarim.framework */; };
+		490F22DF34469428CA084717 /* Pods_tassarimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89D6092CEECE776FF000D5F /* Pods_tassarimUITests.framework */; };
+		6D9B350B1DC3F631007CF4F3 /* tassarimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B350A1DC3F631007CF4F3 /* tassarimTests.swift */; };
+		6D9B35161DC3F631007CF4F3 /* tassarimUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B35151DC3F631007CF4F3 /* tassarimUITests.swift */; };
+		6DDF9BD11E310021007F74DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9B9F1E310021007F74DC /* AppDelegate.swift */; };
+		6DDF9BD21E310021007F74DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA01E310021007F74DC /* Assets.xcassets */; };
+		6DDF9BD51E310021007F74DC /* BucketListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA31E310021007F74DC /* BucketListTableViewCell.swift */; };
+		6DDF9BD61E310021007F74DC /* BucketListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA41E310021007F74DC /* BucketListTableViewController.swift */; };
+		6DDF9BD71E310021007F74DC /* BucketListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA51E310021007F74DC /* BucketListView.swift */; };
+		6DDF9BD81E310021007F74DC /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA61E310021007F74DC /* CommentsTableViewCell.swift */; };
+		6DDF9BD91E310021007F74DC /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA71E310021007F74DC /* CommentsTableViewController.swift */; };
+		6DDF9BDA1E310021007F74DC /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA81E310021007F74DC /* CommentsViewController.swift */; };
+		6DDF9BDB1E310021007F74DC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BA91E310021007F74DC /* Constants.swift */; };
+		6DDF9BDC1E310021007F74DC /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BAA1E310021007F74DC /* CustomNavigationController.swift */; };
+		6DDF9BDD1E310021007F74DC /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BAB1E310021007F74DC /* Device.swift */; };
+		6DDF9BDE1E310021007F74DC /* DribbbleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BAC1E310021007F74DC /* DribbbleAPI.swift */; };
+		6DDF9BDF1E310021007F74DC /* GAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BAD1E310021007F74DC /* GAnalytics.swift */; };
+		6DDF9BE01E310021007F74DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF9BAE1E310021007F74DC /* GoogleService-Info.plist */; };
+		6DDF9BE11E310021007F74DC /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BAF1E310021007F74DC /* HeaderView.swift */; };
+		6DDF9BE21E310021007F74DC /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BB01E310021007F74DC /* ImageViewController.swift */; };
+		6DDF9BE41E310021007F74DC /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BB21E310021007F74DC /* KeychainHelper.swift */; };
+		6DDF9BE51E310021007F74DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF9BB31E310021007F74DC /* LaunchScreen.storyboard */; };
+		6DDF9BE61E310021007F74DC /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BB41E310021007F74DC /* LaunchScreenViewController.swift */; };
+		6DDF9BE71E310021007F74DC /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BB51E310021007F74DC /* Misc.swift */; };
+		6DDF9BEA1E310021007F74DC /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BB81E310021007F74DC /* ProfileCollectionViewCell.swift */; };
+		6DDF9BEB1E310021007F74DC /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BB91E310021007F74DC /* ProfileCollectionViewController.swift */; };
+		6DDF9BEC1E310021007F74DC /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BBA1E310021007F74DC /* ProfileHeaderView.swift */; };
+		6DDF9BED1E310021007F74DC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BBB1E310021007F74DC /* ProfileViewController.swift */; };
+		6DDF9BEE1E310021007F74DC /* ProjectShotsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BBC1E310021007F74DC /* ProjectShotsCollectionViewCell.swift */; };
+		6DDF9BEF1E310021007F74DC /* ProjectShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BBD1E310021007F74DC /* ProjectShotsCollectionViewController.swift */; };
+		6DDF9BF01E310021007F74DC /* ShotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BBE1E310021007F74DC /* ShotDetailViewController.swift */; };
+		6DDF9BF11E310021007F74DC /* ShotsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BBF1E310021007F74DC /* ShotsCollectionViewCell.swift */; };
+		6DDF9BF21E310021007F74DC /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BC01E310021007F74DC /* ShotsCollectionViewController.swift */; };
+		6DDF9BF31E310021007F74DC /* ShotsPageMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BC11E310021007F74DC /* ShotsPageMenuViewController.swift */; };
+		6DDF9BF41E310021007F74DC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BC21E310021007F74DC /* SignInViewController.swift */; };
+		6DDF9BF61E310021007F74DC /* TassRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BC51E310021007F74DC /* TassRouter.swift */; };
+		6DDF9BF71E310021007F74DC /* TeamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BC61E310021007F74DC /* TeamCollectionViewCell.swift */; };
+		6DDF9BF81E310021007F74DC /* TeamCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BC71E310021007F74DC /* TeamCollectionViewController.swift */; };
+		6DDF9BF91E310021007F74DC /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BC91E310021007F74DC /* UIImage+animatedGIF.m */; };
+		6DDF9BFA1E310021007F74DC /* URList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BCA1E310021007F74DC /* URList.swift */; };
+		6DDF9BFB1E310021007F74DC /* UserCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BCB1E310021007F74DC /* UserCollectionViewController.swift */; };
+		6DDF9BFC1E310021007F74DC /* UserProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BCC1E310021007F74DC /* UserProfileTableViewCell.swift */; };
+		6DDF9BFD1E310021007F74DC /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BCD1E310021007F74DC /* UserProfileViewController.swift */; };
+		6DDF9BFE1E310021007F74DC /* UserShotsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BCE1E310021007F74DC /* UserShotsCollectionViewCell.swift */; };
+		6DDF9BFF1E310021007F74DC /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BCF1E310021007F74DC /* UserViewController.swift */; };
+		6DDF9C001E310021007F74DC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9BD01E310021007F74DC /* WebViewController.swift */; };
+		6DDF9C081E31011D007F74DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF9C071E31011D007F74DC /* Main.storyboard */; };
+		6DDF9C0E1E31025E007F74DC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6DDF9C0D1E31025E007F74DC /* Info.plist */; };
+		6DF561561E339B7E00ECC9C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF561551E339B7E00ECC9C2 /* ViewController.swift */; };
+		8BA09939A5C4FCDDAB3CB05B /* Pods_tassarimTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A191FAE78FA044C3A9DE5E60 /* Pods_tassarimTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6D9B35071DC3F631007CF4F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D9B34EA1DC3F631007CF4F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D9B34F11DC3F631007CF4F3;
+			remoteInfo = tassarim;
+		};
+		6D9B35121DC3F631007CF4F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D9B34EA1DC3F631007CF4F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D9B34F11DC3F631007CF4F3;
+			remoteInfo = tassarim;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0190A7EC2EDC0F2584555741 /* Pods-tassarimTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarimTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tassarimTests/Pods-tassarimTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1359EC87C660427916B05CFB /* Pods-tassarimUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarimUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tassarimUITests/Pods-tassarimUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3F2CB7A79B990A2612085355 /* Pods_tassarim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tassarim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		541859CB2F0E6C9B5DC1B6A6 /* Pods-tassarimTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarimTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tassarimTests/Pods-tassarimTests.release.xcconfig"; sourceTree = "<group>"; };
+		5ECBBE1B48951A38D607AB25 /* Pods-tassarimUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarimUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tassarimUITests/Pods-tassarimUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5EDE451FAF98F85A5A2553ED /* Pods-tassarim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarim.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tassarim/Pods-tassarim.debug.xcconfig"; sourceTree = "<group>"; };
+		6D9B34F21DC3F631007CF4F3 /* tassarim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tassarim.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9B35061DC3F631007CF4F3 /* tassarimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tassarimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9B350A1DC3F631007CF4F3 /* tassarimTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tassarimTests.swift; sourceTree = "<group>"; };
+		6D9B350C1DC3F631007CF4F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D9B35111DC3F631007CF4F3 /* tassarimUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tassarimUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9B35151DC3F631007CF4F3 /* tassarimUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tassarimUITests.swift; sourceTree = "<group>"; };
+		6D9B35171DC3F631007CF4F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DDF9B9F1E310021007F74DC /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6DDF9BA01E310021007F74DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6DDF9BA31E310021007F74DC /* BucketListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketListTableViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BA41E310021007F74DC /* BucketListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketListTableViewController.swift; sourceTree = "<group>"; };
+		6DDF9BA51E310021007F74DC /* BucketListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketListView.swift; sourceTree = "<group>"; };
+		6DDF9BA61E310021007F74DC /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BA71E310021007F74DC /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
+		6DDF9BA81E310021007F74DC /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		6DDF9BA91E310021007F74DC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6DDF9BAA1E310021007F74DC /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		6DDF9BAB1E310021007F74DC /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		6DDF9BAC1E310021007F74DC /* DribbbleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleAPI.swift; sourceTree = "<group>"; };
+		6DDF9BAD1E310021007F74DC /* GAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GAnalytics.swift; sourceTree = "<group>"; };
+		6DDF9BAE1E310021007F74DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6DDF9BAF1E310021007F74DC /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		6DDF9BB01E310021007F74DC /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		6DDF9BB21E310021007F74DC /* KeychainHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		6DDF9BB31E310021007F74DC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6DDF9BB41E310021007F74DC /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		6DDF9BB51E310021007F74DC /* Misc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		6DDF9BB81E310021007F74DC /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BB91E310021007F74DC /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
+		6DDF9BBA1E310021007F74DC /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		6DDF9BBB1E310021007F74DC /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6DDF9BBC1E310021007F74DC /* ProjectShotsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectShotsCollectionViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BBD1E310021007F74DC /* ProjectShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectShotsCollectionViewController.swift; sourceTree = "<group>"; };
+		6DDF9BBE1E310021007F74DC /* ShotDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailViewController.swift; sourceTree = "<group>"; };
+		6DDF9BBF1E310021007F74DC /* ShotsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BC01E310021007F74DC /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
+		6DDF9BC11E310021007F74DC /* ShotsPageMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsPageMenuViewController.swift; sourceTree = "<group>"; };
+		6DDF9BC21E310021007F74DC /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		6DDF9BC41E310021007F74DC /* tassarim-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "tassarim-Bridging-Header.h"; sourceTree = "<group>"; };
+		6DDF9BC51E310021007F74DC /* TassRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TassRouter.swift; sourceTree = "<group>"; };
+		6DDF9BC61E310021007F74DC /* TeamCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BC71E310021007F74DC /* TeamCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewController.swift; sourceTree = "<group>"; };
+		6DDF9BC81E310021007F74DC /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		6DDF9BC91E310021007F74DC /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		6DDF9BCA1E310021007F74DC /* URList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URList.swift; sourceTree = "<group>"; };
+		6DDF9BCB1E310021007F74DC /* UserCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewController.swift; sourceTree = "<group>"; };
+		6DDF9BCC1E310021007F74DC /* UserProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BCD1E310021007F74DC /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		6DDF9BCE1E310021007F74DC /* UserShotsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserShotsCollectionViewCell.swift; sourceTree = "<group>"; };
+		6DDF9BCF1E310021007F74DC /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		6DDF9BD01E310021007F74DC /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		6DDF9C071E31011D007F74DC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6DDF9C0D1E31025E007F74DC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DF561551E339B7E00ECC9C2 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A191FAE78FA044C3A9DE5E60 /* Pods_tassarimTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tassarimTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B89D6092CEECE776FF000D5F /* Pods_tassarimUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tassarimUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB51E0E6D6763C97A8FC0210 /* Pods-tassarim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarim.release.xcconfig"; path = "Pods/Target Support Files/Pods-tassarim/Pods-tassarim.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D9B34EF1DC3F631007CF4F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23AA6D4B561D318C871D0D9B /* Pods_tassarim.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9B35031DC3F631007CF4F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BA09939A5C4FCDDAB3CB05B /* Pods_tassarimTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9B350E1DC3F631007CF4F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				490F22DF34469428CA084717 /* Pods_tassarimUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06FBC1689984048A8EEE0963 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F2CB7A79B990A2612085355 /* Pods_tassarim.framework */,
+				A191FAE78FA044C3A9DE5E60 /* Pods_tassarimTests.framework */,
+				B89D6092CEECE776FF000D5F /* Pods_tassarimUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D9B34E91DC3F631007CF4F3 = {
+			isa = PBXGroup;
+			children = (
+				6D9B34F41DC3F631007CF4F3 /* tassarim */,
+				6D9B35091DC3F631007CF4F3 /* tassarimTests */,
+				6D9B35141DC3F631007CF4F3 /* tassarimUITests */,
+				6D9B34F31DC3F631007CF4F3 /* Products */,
+				D2D3237955402838AC13B52E /* Pods */,
+				06FBC1689984048A8EEE0963 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6D9B34F31DC3F631007CF4F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D9B34F21DC3F631007CF4F3 /* tassarim.app */,
+				6D9B35061DC3F631007CF4F3 /* tassarimTests.xctest */,
+				6D9B35111DC3F631007CF4F3 /* tassarimUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D9B34F41DC3F631007CF4F3 /* tassarim */ = {
+			isa = PBXGroup;
+			children = (
+				6DDF9C091E31015D007F74DC /* Interfaces */,
+				6DDF9C0A1E31016E007F74DC /* User */,
+				6DDF9C0B1E310180007F74DC /* Shots */,
+				6DDF9C0C1E310198007F74DC /* API */,
+				6DDF9B9F1E310021007F74DC /* AppDelegate.swift */,
+				6DDF9BAA1E310021007F74DC /* CustomNavigationController.swift */,
+				6DDF9BB01E310021007F74DC /* ImageViewController.swift */,
+				6DDF9BB41E310021007F74DC /* LaunchScreenViewController.swift */,
+				6DDF9BB51E310021007F74DC /* Misc.swift */,
+				6DDF9BC41E310021007F74DC /* tassarim-Bridging-Header.h */,
+				6DDF9BC81E310021007F74DC /* UIImage+animatedGIF.h */,
+				6DDF9BC91E310021007F74DC /* UIImage+animatedGIF.m */,
+				6DDF9BD01E310021007F74DC /* WebViewController.swift */,
+				6DDF9BAE1E310021007F74DC /* GoogleService-Info.plist */,
+				6DDF9C0D1E31025E007F74DC /* Info.plist */,
+			);
+			path = tassarim;
+			sourceTree = "<group>";
+		};
+		6D9B35091DC3F631007CF4F3 /* tassarimTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D9B350A1DC3F631007CF4F3 /* tassarimTests.swift */,
+				6D9B350C1DC3F631007CF4F3 /* Info.plist */,
+			);
+			path = tassarimTests;
+			sourceTree = "<group>";
+		};
+		6D9B35141DC3F631007CF4F3 /* tassarimUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6D9B35151DC3F631007CF4F3 /* tassarimUITests.swift */,
+				6D9B35171DC3F631007CF4F3 /* Info.plist */,
+			);
+			path = tassarimUITests;
+			sourceTree = "<group>";
+		};
+		6DDF9C091E31015D007F74DC /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				6DDF9C071E31011D007F74DC /* Main.storyboard */,
+				6DDF9BB31E310021007F74DC /* LaunchScreen.storyboard */,
+				6DDF9BA01E310021007F74DC /* Assets.xcassets */,
+			);
+			name = Interfaces;
+			sourceTree = "<group>";
+		};
+		6DDF9C0A1E31016E007F74DC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				6DDF9BCF1E310021007F74DC /* UserViewController.swift */,
+				6DDF9BB81E310021007F74DC /* ProfileCollectionViewCell.swift */,
+				6DDF9BB91E310021007F74DC /* ProfileCollectionViewController.swift */,
+				6DDF9BBA1E310021007F74DC /* ProfileHeaderView.swift */,
+				6DDF9BBB1E310021007F74DC /* ProfileViewController.swift */,
+				6DDF9BC21E310021007F74DC /* SignInViewController.swift */,
+				6DF561551E339B7E00ECC9C2 /* ViewController.swift */,
+				6DDF9BCA1E310021007F74DC /* URList.swift */,
+				6DDF9BAF1E310021007F74DC /* HeaderView.swift */,
+				6DDF9BC71E310021007F74DC /* TeamCollectionViewController.swift */,
+				6DDF9BC61E310021007F74DC /* TeamCollectionViewCell.swift */,
+				6DDF9BCB1E310021007F74DC /* UserCollectionViewController.swift */,
+				6DDF9BCD1E310021007F74DC /* UserProfileViewController.swift */,
+				6DDF9BCC1E310021007F74DC /* UserProfileTableViewCell.swift */,
+				6DDF9BA31E310021007F74DC /* BucketListTableViewCell.swift */,
+				6DDF9BA41E310021007F74DC /* BucketListTableViewController.swift */,
+				6DDF9BA51E310021007F74DC /* BucketListView.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		6DDF9C0B1E310180007F74DC /* Shots */ = {
+			isa = PBXGroup;
+			children = (
+				6DDF9BCE1E310021007F74DC /* UserShotsCollectionViewCell.swift */,
+				6DDF9BA61E310021007F74DC /* CommentsTableViewCell.swift */,
+				6DDF9BA71E310021007F74DC /* CommentsTableViewController.swift */,
+				6DDF9BA81E310021007F74DC /* CommentsViewController.swift */,
+				6DDF9BBC1E310021007F74DC /* ProjectShotsCollectionViewCell.swift */,
+				6DDF9BBD1E310021007F74DC /* ProjectShotsCollectionViewController.swift */,
+				6DDF9BBE1E310021007F74DC /* ShotDetailViewController.swift */,
+				6DDF9BBF1E310021007F74DC /* ShotsCollectionViewCell.swift */,
+				6DDF9BC01E310021007F74DC /* ShotsCollectionViewController.swift */,
+				6DDF9BC11E310021007F74DC /* ShotsPageMenuViewController.swift */,
+			);
+			name = Shots;
+			sourceTree = "<group>";
+		};
+		6DDF9C0C1E310198007F74DC /* API */ = {
+			isa = PBXGroup;
+			children = (
+				6DDF9BA91E310021007F74DC /* Constants.swift */,
+				6DDF9BAB1E310021007F74DC /* Device.swift */,
+				6DDF9BAC1E310021007F74DC /* DribbbleAPI.swift */,
+				6DDF9BAD1E310021007F74DC /* GAnalytics.swift */,
+				6DDF9BB21E310021007F74DC /* KeychainHelper.swift */,
+				6DDF9BC51E310021007F74DC /* TassRouter.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		D2D3237955402838AC13B52E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5EDE451FAF98F85A5A2553ED /* Pods-tassarim.debug.xcconfig */,
+				EB51E0E6D6763C97A8FC0210 /* Pods-tassarim.release.xcconfig */,
+				0190A7EC2EDC0F2584555741 /* Pods-tassarimTests.debug.xcconfig */,
+				541859CB2F0E6C9B5DC1B6A6 /* Pods-tassarimTests.release.xcconfig */,
+				1359EC87C660427916B05CFB /* Pods-tassarimUITests.debug.xcconfig */,
+				5ECBBE1B48951A38D607AB25 /* Pods-tassarimUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D9B34F11DC3F631007CF4F3 /* tassarim */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D9B351A1DC3F631007CF4F3 /* Build configuration list for PBXNativeTarget "tassarim" */;
+			buildPhases = (
+				3FFE02D6D722941CCA29F695 /* [CP] Check Pods Manifest.lock */,
+				6D9B34EE1DC3F631007CF4F3 /* Sources */,
+				6D9B34EF1DC3F631007CF4F3 /* Frameworks */,
+				6D9B34F01DC3F631007CF4F3 /* Resources */,
+				8D6008A172F71B748CA00824 /* [CP] Embed Pods Frameworks */,
+				131F41A6A3FC3C45FC5A70E8 /* [CP] Copy Pods Resources */,
+				6D0A01D11DE365BB001BB8E9 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tassarim;
+			productName = tassarim;
+			productReference = 6D9B34F21DC3F631007CF4F3 /* tassarim.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6D9B35051DC3F631007CF4F3 /* tassarimTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D9B351D1DC3F631007CF4F3 /* Build configuration list for PBXNativeTarget "tassarimTests" */;
+			buildPhases = (
+				F8ED1A8129FBF6DAE752C90C /* [CP] Check Pods Manifest.lock */,
+				6D9B35021DC3F631007CF4F3 /* Sources */,
+				6D9B35031DC3F631007CF4F3 /* Frameworks */,
+				6D9B35041DC3F631007CF4F3 /* Resources */,
+				5B1809D0778B2291FE5DC3DF /* [CP] Embed Pods Frameworks */,
+				CB26B88EFF0D3BB440AD58DE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D9B35081DC3F631007CF4F3 /* PBXTargetDependency */,
+			);
+			name = tassarimTests;
+			productName = tassarimTests;
+			productReference = 6D9B35061DC3F631007CF4F3 /* tassarimTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6D9B35101DC3F631007CF4F3 /* tassarimUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D9B35201DC3F631007CF4F3 /* Build configuration list for PBXNativeTarget "tassarimUITests" */;
+			buildPhases = (
+				C0D875EA62365C9471AFED10 /* [CP] Check Pods Manifest.lock */,
+				6D9B350D1DC3F631007CF4F3 /* Sources */,
+				6D9B350E1DC3F631007CF4F3 /* Frameworks */,
+				6D9B350F1DC3F631007CF4F3 /* Resources */,
+				C30A126FFC18C240D6E938A4 /* [CP] Embed Pods Frameworks */,
+				881931FF5879E30E535AEBE5 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D9B35131DC3F631007CF4F3 /* PBXTargetDependency */,
+			);
+			name = tassarimUITests;
+			productName = tassarimUITests;
+			productReference = 6D9B35111DC3F631007CF4F3 /* tassarimUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D9B34EA1DC3F631007CF4F3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = saylanc;
+				TargetAttributes = {
+					6D9B34F11DC3F631007CF4F3 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					6D9B35051DC3F631007CF4F3 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 6D9B34F11DC3F631007CF4F3;
+					};
+					6D9B35101DC3F631007CF4F3 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 6D9B34F11DC3F631007CF4F3;
+					};
+				};
+			};
+			buildConfigurationList = 6D9B34ED1DC3F631007CF4F3 /* Build configuration list for PBXProject "tassarim" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6D9B34E91DC3F631007CF4F3;
+			productRefGroup = 6D9B34F31DC3F631007CF4F3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D9B34F11DC3F631007CF4F3 /* tassarim */,
+				6D9B35051DC3F631007CF4F3 /* tassarimTests */,
+				6D9B35101DC3F631007CF4F3 /* tassarimUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D9B34F01DC3F631007CF4F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DDF9C081E31011D007F74DC /* Main.storyboard in Resources */,
+				6DDF9BD21E310021007F74DC /* Assets.xcassets in Resources */,
+				6DDF9BE51E310021007F74DC /* LaunchScreen.storyboard in Resources */,
+				6DDF9C0E1E31025E007F74DC /* Info.plist in Resources */,
+				6DDF9BE01E310021007F74DC /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9B35041DC3F631007CF4F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9B350F1DC3F631007CF4F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		131F41A6A3FC3C45FC5A70E8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tassarim/Pods-tassarim-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3FFE02D6D722941CCA29F695 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5B1809D0778B2291FE5DC3DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tassarimTests/Pods-tassarimTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D0A01D11DE365BB001BB8E9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 12b7474e482e476288d7e78e822ac1802687aef0 52904b5f5de8a6c55d49c3a950a2c2042afea3deb714a8c79b5c4d37ac14bb0d";
+		};
+		881931FF5879E30E535AEBE5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tassarimUITests/Pods-tassarimUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D6008A172F71B748CA00824 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tassarim/Pods-tassarim-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0D875EA62365C9471AFED10 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C30A126FFC18C240D6E938A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tassarimUITests/Pods-tassarimUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB26B88EFF0D3BB440AD58DE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-tassarimTests/Pods-tassarimTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8ED1A8129FBF6DAE752C90C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D9B34EE1DC3F631007CF4F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DDF9BDD1E310021007F74DC /* Device.swift in Sources */,
+				6DDF9BFD1E310021007F74DC /* UserProfileViewController.swift in Sources */,
+				6DDF9BD91E310021007F74DC /* CommentsTableViewController.swift in Sources */,
+				6DDF9BD71E310021007F74DC /* BucketListView.swift in Sources */,
+				6DDF9BE71E310021007F74DC /* Misc.swift in Sources */,
+				6DDF9BFA1E310021007F74DC /* URList.swift in Sources */,
+				6DDF9BFF1E310021007F74DC /* UserViewController.swift in Sources */,
+				6DDF9BD81E310021007F74DC /* CommentsTableViewCell.swift in Sources */,
+				6DDF9BE61E310021007F74DC /* LaunchScreenViewController.swift in Sources */,
+				6DDF9BED1E310021007F74DC /* ProfileViewController.swift in Sources */,
+				6DDF9BD51E310021007F74DC /* BucketListTableViewCell.swift in Sources */,
+				6DDF9BF11E310021007F74DC /* ShotsCollectionViewCell.swift in Sources */,
+				6DDF9BDA1E310021007F74DC /* CommentsViewController.swift in Sources */,
+				6DDF9BEF1E310021007F74DC /* ProjectShotsCollectionViewController.swift in Sources */,
+				6DDF9BF91E310021007F74DC /* UIImage+animatedGIF.m in Sources */,
+				6DDF9BD11E310021007F74DC /* AppDelegate.swift in Sources */,
+				6DDF9BF81E310021007F74DC /* TeamCollectionViewController.swift in Sources */,
+				6DDF9BEA1E310021007F74DC /* ProfileCollectionViewCell.swift in Sources */,
+				6DDF9BEC1E310021007F74DC /* ProfileHeaderView.swift in Sources */,
+				6DDF9C001E310021007F74DC /* WebViewController.swift in Sources */,
+				6DDF9BF01E310021007F74DC /* ShotDetailViewController.swift in Sources */,
+				6DDF9BF71E310021007F74DC /* TeamCollectionViewCell.swift in Sources */,
+				6DDF9BE21E310021007F74DC /* ImageViewController.swift in Sources */,
+				6DDF9BDC1E310021007F74DC /* CustomNavigationController.swift in Sources */,
+				6DF561561E339B7E00ECC9C2 /* ViewController.swift in Sources */,
+				6DDF9BDF1E310021007F74DC /* GAnalytics.swift in Sources */,
+				6DDF9BDE1E310021007F74DC /* DribbbleAPI.swift in Sources */,
+				6DDF9BFC1E310021007F74DC /* UserProfileTableViewCell.swift in Sources */,
+				6DDF9BF21E310021007F74DC /* ShotsCollectionViewController.swift in Sources */,
+				6DDF9BF61E310021007F74DC /* TassRouter.swift in Sources */,
+				6DDF9BE41E310021007F74DC /* KeychainHelper.swift in Sources */,
+				6DDF9BF31E310021007F74DC /* ShotsPageMenuViewController.swift in Sources */,
+				6DDF9BEE1E310021007F74DC /* ProjectShotsCollectionViewCell.swift in Sources */,
+				6DDF9BF41E310021007F74DC /* SignInViewController.swift in Sources */,
+				6DDF9BFE1E310021007F74DC /* UserShotsCollectionViewCell.swift in Sources */,
+				6DDF9BD61E310021007F74DC /* BucketListTableViewController.swift in Sources */,
+				6DDF9BFB1E310021007F74DC /* UserCollectionViewController.swift in Sources */,
+				6DDF9BDB1E310021007F74DC /* Constants.swift in Sources */,
+				6DDF9BEB1E310021007F74DC /* ProfileCollectionViewController.swift in Sources */,
+				6DDF9BE11E310021007F74DC /* HeaderView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9B35021DC3F631007CF4F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D9B350B1DC3F631007CF4F3 /* tassarimTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9B350D1DC3F631007CF4F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D9B35161DC3F631007CF4F3 /* tassarimUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6D9B35081DC3F631007CF4F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D9B34F11DC3F631007CF4F3 /* tassarim */;
+			targetProxy = 6D9B35071DC3F631007CF4F3 /* PBXContainerItemProxy */;
+		};
+		6D9B35131DC3F631007CF4F3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D9B34F11DC3F631007CF4F3 /* tassarim */;
+			targetProxy = 6D9B35121DC3F631007CF4F3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6D9B35181DC3F631007CF4F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6D9B35191DC3F631007CF4F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D9B351B1DC3F631007CF4F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EDE451FAF98F85A5A2553ED /* Pods-tassarim.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = tassarim/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saylanc.tassarim;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "tassarim/tassarim-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6D9B351C1DC3F631007CF4F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB51E0E6D6763C97A8FC0210 /* Pods-tassarim.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = tassarim/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saylanc.tassarim;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "tassarim/tassarim-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		6D9B351E1DC3F631007CF4F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0190A7EC2EDC0F2584555741 /* Pods-tassarimTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tassarimTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saylanc.tassarimTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tassarim.app/tassarim";
+			};
+			name = Debug;
+		};
+		6D9B351F1DC3F631007CF4F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 541859CB2F0E6C9B5DC1B6A6 /* Pods-tassarimTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = tassarimTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saylanc.tassarimTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tassarim.app/tassarim";
+			};
+			name = Release;
+		};
+		6D9B35211DC3F631007CF4F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1359EC87C660427916B05CFB /* Pods-tassarimUITests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = tassarimUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saylanc.tassarimUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = tassarim;
+			};
+			name = Debug;
+		};
+		6D9B35221DC3F631007CF4F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5ECBBE1B48951A38D607AB25 /* Pods-tassarimUITests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = tassarimUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saylanc.tassarimUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = tassarim;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D9B34ED1DC3F631007CF4F3 /* Build configuration list for PBXProject "tassarim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D9B35181DC3F631007CF4F3 /* Debug */,
+				6D9B35191DC3F631007CF4F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D9B351A1DC3F631007CF4F3 /* Build configuration list for PBXNativeTarget "tassarim" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D9B351B1DC3F631007CF4F3 /* Debug */,
+				6D9B351C1DC3F631007CF4F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D9B351D1DC3F631007CF4F3 /* Build configuration list for PBXNativeTarget "tassarimTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D9B351E1DC3F631007CF4F3 /* Debug */,
+				6D9B351F1DC3F631007CF4F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D9B35201DC3F631007CF4F3 /* Build configuration list for PBXNativeTarget "tassarimUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D9B35211DC3F631007CF4F3 /* Debug */,
+				6D9B35221DC3F631007CF4F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D9B34EA1DC3F631007CF4F3 /* Project object */;
+}
