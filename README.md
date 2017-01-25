@@ -2,7 +2,7 @@
 
 ![](Screenshots/tassarimapp.png)
 
-Open Source [Dribbble iOS client](https://itunes.apple.com/tr/app/tassarim/id1192816659?mt=8) for [Dribbble](www.dribbble.com), by the creator of [Makale App](https://itunes.apple.com/tr/app/makale-app/id1018812586?mt=8).
+Open Source [Dribbble iOS client](https://itunes.apple.com/tr/app/tassarim/id1192816659?mt=8) for [Dribbble](http://www.dribbble.com), by the creator of [Makale App](https://itunes.apple.com/tr/app/makale-app/id1018812586?mt=8).
 
 # Desing
 
