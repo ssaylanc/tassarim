@@ -40,7 +40,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     @IBOutlet weak var bucketTableView: UITableView!
     @IBOutlet weak var commentXLayout: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+    @IBOutlet weak var shotImageBack: UIImageView!
     @IBAction func shareButtonDidTouch(sender: AnyObject) {
         GAnalytics.sharedInstance.trackAction("BUTTON", action: "shareButton", label: "share \(self.shotID)", value: 1)
         let textToShare = "Shared with @tassarimapp"
@@ -148,7 +148,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                         options: .CurveLinear,
                         animations: { _ in
                              self.likeButton.transform = CGAffineTransformIdentity
-                            self.setLikeStatus(true)
+                             self.setLikeStatus(true)
                     },
                     completion: { _ in
                     }
@@ -513,7 +513,15 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                             if let data = NSData(contentsOfURL: url!) {
                                 self.shotview.animateWithImageData(data)
                                 self.shotview.layer.cornerRadius = 10
-                                self.shotview.clipsToBounds = true}
+                                self.shotview.clipsToBounds = true
+                                //Setup the back shot Image with blur effect
+                                self.shotImageBack.sd_setImageWithURL(url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                                blurEffectView.frame = self.shotImageBack.bounds
+                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                self.shotImageBack.addSubview(blurEffectView)
+                            }
                         }
                     }else{
                         if let urlString = self.shot?["images"]!["hidpi"].string where urlString.characters.count > 0{
@@ -521,13 +529,29 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                             if let data = NSData(contentsOfURL: url!) {
                                 self.shotview.animateWithImageData(data)
                                 self.shotview.layer.cornerRadius = 10
-                                self.shotview.clipsToBounds = true}
+                                self.shotview.clipsToBounds = true
+                                //Setup the back shot Image with blur effect
+                                self.shotImageBack.sd_setImageWithURL(url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                                blurEffectView.frame = self.shotImageBack.bounds
+                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                self.shotImageBack.addSubview(blurEffectView)
+                            }
                         }else if let urlString = self.shot?["images"]!["normal"].string where urlString.characters.count > 0{
                             let url = NSURL(string: urlString)
                             if let data = NSData(contentsOfURL: url!) {
                                 self.shotview.animateWithImageData(data)
                                 self.shotview.layer.cornerRadius = 10
-                                self.shotview.clipsToBounds = true}
+                                self.shotview.clipsToBounds = true
+                                //Setup the back shot Image with blur effect
+                                self.shotImageBack.sd_setImageWithURL(url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                                blurEffectView.frame = self.shotImageBack.bounds
+                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                self.shotImageBack.addSubview(blurEffectView)
+                            }
                         }
                     }
                 }

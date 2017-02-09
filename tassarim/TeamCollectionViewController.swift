@@ -354,11 +354,11 @@ class TeamCollectionViewController: UICollectionViewController {
             guard let shotID = self.shots?[indexPath.row]["id"].int else {return}
             toView.shotID = shotID
         }
-        if segue.identifier == "showMoreSegue"{
+        /*if segue.identifier == "showMoreSegue"{
             let toView = segue.destinationViewController as! MoreCollectionViewController
             guard let teamID = self.user?["id"]!.int else {return}
             toView.teamID = teamID
-        }
+        }*/
         if segue.identifier == "ShowUserSegue"{
             let indexPath = sender as! NSIndexPath
             let toView = segue.destinationViewController as! UserCollectionViewController

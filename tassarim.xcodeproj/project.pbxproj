@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		23AA6D4B561D318C871D0D9B /* Pods_tassarim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2CB7A79B990A2612085355 /* Pods_tassarim.framework */; };
 		490F22DF34469428CA084717 /* Pods_tassarimUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B89D6092CEECE776FF000D5F /* Pods_tassarimUITests.framework */; };
+		6D867BA11E471CAA00CC6B3F /* ShotDetailAlternativeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D867BA01E471CAA00CC6B3F /* ShotDetailAlternativeViewController.swift */; };
 		6D9B350B1DC3F631007CF4F3 /* tassarimTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B350A1DC3F631007CF4F3 /* tassarimTests.swift */; };
 		6D9B35161DC3F631007CF4F3 /* tassarimUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9B35151DC3F631007CF4F3 /* tassarimUITests.swift */; };
 		6DDF9BD11E310021007F74DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDF9B9F1E310021007F74DC /* AppDelegate.swift */; };
@@ -83,6 +84,7 @@
 		541859CB2F0E6C9B5DC1B6A6 /* Pods-tassarimTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarimTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tassarimTests/Pods-tassarimTests.release.xcconfig"; sourceTree = "<group>"; };
 		5ECBBE1B48951A38D607AB25 /* Pods-tassarimUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarimUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tassarimUITests/Pods-tassarimUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5EDE451FAF98F85A5A2553ED /* Pods-tassarim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tassarim.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tassarim/Pods-tassarim.debug.xcconfig"; sourceTree = "<group>"; };
+		6D867BA01E471CAA00CC6B3F /* ShotDetailAlternativeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailAlternativeViewController.swift; sourceTree = "<group>"; };
 		6D9B34F21DC3F631007CF4F3 /* tassarim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tassarim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D9B35061DC3F631007CF4F3 /* tassarimTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tassarimTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D9B350A1DC3F631007CF4F3 /* tassarimTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tassarimTests.swift; sourceTree = "<group>"; };
@@ -256,8 +258,8 @@
 			isa = PBXGroup;
 			children = (
 				6DDF9BCF1E310021007F74DC /* UserViewController.swift */,
-				6DDF9BB81E310021007F74DC /* ProfileCollectionViewCell.swift */,
 				6DDF9BB91E310021007F74DC /* ProfileCollectionViewController.swift */,
+				6DDF9BB81E310021007F74DC /* ProfileCollectionViewCell.swift */,
 				6DDF9BBA1E310021007F74DC /* ProfileHeaderView.swift */,
 				6DDF9BBB1E310021007F74DC /* ProfileViewController.swift */,
 				6DDF9BC21E310021007F74DC /* SignInViewController.swift */,
@@ -286,6 +288,7 @@
 				6DDF9BBC1E310021007F74DC /* ProjectShotsCollectionViewCell.swift */,
 				6DDF9BBD1E310021007F74DC /* ProjectShotsCollectionViewController.swift */,
 				6DDF9BBE1E310021007F74DC /* ShotDetailViewController.swift */,
+				6D867BA01E471CAA00CC6B3F /* ShotDetailAlternativeViewController.swift */,
 				6DDF9BBF1E310021007F74DC /* ShotsCollectionViewCell.swift */,
 				6DDF9BC01E310021007F74DC /* ShotsCollectionViewController.swift */,
 				6DDF9BC11E310021007F74DC /* ShotsPageMenuViewController.swift */,
@@ -617,6 +620,7 @@
 				6DDF9BFD1E310021007F74DC /* UserProfileViewController.swift in Sources */,
 				6DDF9BD91E310021007F74DC /* CommentsTableViewController.swift in Sources */,
 				6DDF9BD71E310021007F74DC /* BucketListView.swift in Sources */,
+				6D867BA11E471CAA00CC6B3F /* ShotDetailAlternativeViewController.swift in Sources */,
 				6DDF9BE71E310021007F74DC /* Misc.swift in Sources */,
 				6DDF9BFA1E310021007F74DC /* URList.swift in Sources */,
 				6DDF9BFF1E310021007F74DC /* UserViewController.swift in Sources */,

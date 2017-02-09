@@ -61,7 +61,6 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         self.typeView.layer.borderColor = UIColor.whiteColor().CGColor
         
         if let urlString = self.follower?["follower"]["avatar_url"]{
-            print(urlString)
             self.avatarImageView.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
             self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.width/2
             self.avatarImageView.clipsToBounds = true
