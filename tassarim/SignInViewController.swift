@@ -20,7 +20,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var logoWidth: NSLayoutConstraint!
     @IBOutlet weak var logoBottom: NSLayoutConstraint!
     @IBOutlet weak var logoHeight: NSLayoutConstraint!
-    @IBAction func signInButtonDidTouch(sender: AnyObject) {
+    @IBAction func signInButtonDidTouch(_ sender: AnyObject) {
         
         self.doOAuthDribbble()
     }
@@ -28,8 +28,8 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("sedar\(UIDevice().type)")
-        switch UIDevice().type {
+        print("sedar\(UIDevice().model)")
+        switch UIDevice().modelName {
         case .iPhone4:
             self.logoWidth.constant = 100
             self.logoHeight.constant = 100
@@ -46,11 +46,11 @@ class SignInViewController: UIViewController {
             
         }
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.isTranslucent = true
         //safariViewController?.delegate = self
     }
     
@@ -58,7 +58,7 @@ class SignInViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let data = KeychainHelper.load("dribbble_access_token")
         var token: String = ""
@@ -72,7 +72,7 @@ class SignInViewController: UIViewController {
             //self.doOAuthDribbble()
         }
         else {
-            self.performSegueWithIdentifier("SignedInSegue", sender: self)
+            self.performSegue(withIdentifier: "SignedInSegue", sender: self)
             /*let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
              let shotsVC = mainStoryBoard.instantiateViewControllerWithIdentifier("ShotsVC")
              self.presentViewController(shotsVC, animated: true, completion: nil)*/
@@ -80,8 +80,20 @@ class SignInViewController: UIViewController {
     }
     
     func doOAuthDribbble(){
-        let state: String = generateStateWithLength(20) as String
-        oauthswift.authorizeWithCallbackURL(NSURL(string: "tassarim://oauth")!, scope: "public+write", state: state, success: {
+        let state: String = generateState(withLength: 20)
+        let _ = oauthswift.authorize(
+            withCallbackURL: URL(string: "tassarim://oauth")!, scope: "public+write", state:state,
+            success: { credential, response, parameters in
+                KeychainHelper.save ("dribbble_access_token", data: KeychainHelper.stringToNSDATA(credential.oauthToken))
+                DispatchQueue.main.async() { [unowned self] in
+                    self.performSegue(withIdentifier: "SignedInSegue", sender: self)
+                }
+        },
+            failure: { error in
+                print(error.description)
+        })
+        
+        /*oauthswift.authorize(withCallbackURL: URL(string: "tassarim://oauth")!, scope: "public+write", state: state, success: {
             credential, response, parameters in
             
             KeychainHelper.save ("dribbble_access_token", data: KeychainHelper.stringToNSDATA(credential.oauth_token) )
@@ -92,7 +104,7 @@ class SignInViewController: UIViewController {
             
             }, failure: {(error:NSError!) -> Void in
                 print(error.localizedDescription)
-        })
+        })*/
         
         /*oauthswift.authorizeWithCallbackURL( NSURL(string: "tassarim://oauth")!, scope: "public+write", state: "", success: {
             credential, response, parameters in
@@ -124,10 +136,10 @@ class SignInViewController: UIViewController {
         })*/
     }
     
-    func showAlertView(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+    func showAlertView(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     /*

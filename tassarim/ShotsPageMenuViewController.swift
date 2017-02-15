@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import PageMenu
+//import PageMenu
 
 class ShotsPageMenuViewController: UIViewController {
 
-    var pageMenu : CAPSPageMenu?
+    //var pageMenu : CAPSPageMenu?
     var categorie_id: Int!
     var categorie_name: String = ""
     
@@ -19,7 +19,7 @@ class ShotsPageMenuViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         // MARK: - Scroll menu setup

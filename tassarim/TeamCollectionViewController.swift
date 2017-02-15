@@ -26,16 +26,16 @@ class TeamCollectionViewController: UICollectionViewController {
     var firstTimeLoad: Bool! = true
     var selectedIndex: Int! = 0
     
-    let colors = [UIColor(rgba: "#1abc9c"), UIColor(rgba: "#f1c40f"), UIColor(rgba: "#3498db"), UIColor(rgba: "#e74c3c"), UIColor(rgba: "#9b59b6"), UIColor(rgba: "#95a5a6"), UIColor(rgba: "#16a085"), UIColor(rgba: "#f39c12"), UIColor(rgba: "#2980b9"), UIColor(rgba: "#c0392b"), UIColor(rgba: "#8e44ad"), UIColor(rgba: "#bdc3c7"), UIColor(rgba: "#27ae60"), UIColor(rgba: "#d35400"), UIColor(rgba: "#2c3e50"), UIColor(rgba: "#3498db"), UIColor(rgba: "#e67e22"), UIColor(rgba: "#7f8c8d"), UIColor(rgba: "#1abc9c"), UIColor(rgba: "#7f8c8d")]
+    let colors = [UIColor("#1abc9c"), UIColor("#f1c40f"), UIColor("#3498db"), UIColor("#e74c3c"), UIColor("#9b59b6"), UIColor("#95a5a6"), UIColor("#16a085"), UIColor("#f39c12"), UIColor("#2980b9"), UIColor("#c0392b"), UIColor("#8e44ad"), UIColor("#bdc3c7"), UIColor("#27ae60"), UIColor("#d35400"), UIColor("#2c3e50"), UIColor("#3498db"), UIColor("#e67e22"), UIColor("#7f8c8d"), UIColor("#1abc9c"), UIColor("#7f8c8d")]
     
-    private func addActivityIndicator() {
+    fileprivate func addActivityIndicator() {
         let frame = CGRect(x: collectionView!.center.x - 40 / 2, y: collectionView!.center.y - 20, width: 40, height: 40)
-        let activityType = NVActivityIndicatorType.LineScale
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.whiteColor())
+        let activityType = NVActivityIndicatorType.lineScale
+        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.white)
         if self.firstTimeLoad == true {
             myView = UIView(frame: CGRect(x: 0, y: 0, width: collectionView!.frame.width, height: collectionView!.frame.height))
             self.view.addSubview(myView)
-            myView.backgroundColor = UIColor(rgba: "#FFC27E")
+            myView.backgroundColor = UIColor("#FFC27E")
             view.addSubview(myView)
             if let activityIndicatorView = activityIndicatorView {
                 myView.addSubview(activityIndicatorView)
@@ -57,8 +57,8 @@ class TeamCollectionViewController: UICollectionViewController {
     
     func stopActivityIndicatorView() {
         if let indicator = activityIndicatorView {
-            UIView.animateWithDuration(
-                0.6,
+            UIView.animate(
+                withDuration: 0.6,
                 delay: 0.1,
                 usingSpringWithDamping: 0.7,
                 initialSpringVelocity: 0.0,
@@ -85,22 +85,22 @@ class TeamCollectionViewController: UICollectionViewController {
         self.loadUserShots()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.barTintColor = UIColor(rgba: "#FFC27E")
+        self.navigationController!.navigationBar.barTintColor = UIColor("#FFC27E")
         GAnalytics.sharedInstance.sendScreenTracking("UserView, ID:\(userID)")
     }
     
     func showMore() {
         if DribbbleAPI.sharedInstance.isAuthenticated(){
-            performSegueWithIdentifier("showMoreSegue", sender: self)
+            performSegue(withIdentifier: "showMoreSegue", sender: self)
             GAnalytics.sharedInstance.trackAction("BUTTON", action: "openProfileSegue", label: "openProfileSegue", value: 1)
         }
     }
     
     var userName: String!
     var location: String!
-    var avatarImageURL: NSURL!
+    var avatarImageURL: URL!
     var isPro: Bool!
     var isProLabel: String!
     var team: String!
@@ -117,7 +117,7 @@ class TeamCollectionViewController: UICollectionViewController {
                 self.title = self.userName
                 self.location = self.user?["location"]!.string
                 if let urlAvatar = self.user?["avatar_url"]{
-                    self.avatarImageURL = NSURL(string: urlAvatar.stringValue)
+                    self.avatarImageURL = URL(string: urlAvatar.stringValue)
                 }
                 let type = self.user?["type"]!.string
                 if type! == "Player" {
@@ -158,7 +158,7 @@ class TeamCollectionViewController: UICollectionViewController {
         }
     }
     
-    func loadUserShots(page: Int = 1){
+    func loadUserShots(_ page: Int = 1){
         DribbbleAPI.sharedInstance.loadUserShots(userID, page: page) { (userShots) in
             if let data = userShots.arrayValue as [SwiftyJSON.JSON]?{
                 self.shots = data
@@ -169,20 +169,20 @@ class TeamCollectionViewController: UICollectionViewController {
         
     }
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         if selectedIndex == 0 { return self.shots?.count ?? 0}
         else if selectedIndex == 1 { return self.members?.count ?? 0}
         else { return self.projects?.count ?? 0}
     }
     
-    func segmentedControlDidChangeSegment(segmentedControl: UISegmentedControl) {
+    func segmentedControlDidChangeSegment(_ segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             self.selectedIndex = 0
@@ -201,9 +201,9 @@ class TeamCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if selectedIndex == 0 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ShotCell", forIndexPath: indexPath) as! TeamCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShotCell", for: indexPath) as! TeamCollectionViewCell
             cell.shot = self.shots?[indexPath.row]
             /*let rowsToLoadFromBottom = 3;
             let rowsLoaded = self.shots!.count
@@ -215,29 +215,29 @@ class TeamCollectionViewController: UICollectionViewController {
             }*/
             return cell
         }else if selectedIndex == 1 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemberCell", forIndexPath: indexPath) as! TeamCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemberCell", for: indexPath) as! TeamCollectionViewCell
             cell.members = self.members?[indexPath.row]
             return cell
             
         }else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProjectCell", forIndexPath: indexPath) as! TeamCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCell", for: indexPath) as! TeamCollectionViewCell
             cell.projects = self.projects?[indexPath.row]
             //cell.backgroundImage.backgroundColor = RandomFlatColorWithShade(.Dark)
             cell.backgroundImage.backgroundColor = self.colors[indexPath.row % self.colors.count]
             cell.backgroundImage.layer.cornerRadius = 10
             cell.backgroundImage.layer.borderWidth = 2
-            cell.backgroundImage.layer.borderColor = UIColor.whiteColor().CGColor
+            cell.backgroundImage.layer.borderColor = UIColor.white.cgColor
             cell.backgroundImage.clipsToBounds = true
-            cell.projectIcon.backgroundColor = UIColor.clearColor()
+            cell.projectIcon.backgroundColor = UIColor.clear
             cell.projectIcon.layer.cornerRadius = 15
             cell.projectIcon.clipsToBounds = true
             cell.projectIcon.layer.borderWidth = 2
-            cell.projectIcon.layer.borderColor = UIColor.whiteColor().CGColor
+            cell.projectIcon.layer.borderColor = UIColor.white.cgColor
             return cell
         }
     }
     
-    func segmentedControlDidChangeSegmend(segmentedControl: UISegmentedControl) {
+    func segmentedControlDidChangeSegmend(_ segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             self.selectedIndex = 0
@@ -255,18 +255,18 @@ class TeamCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "headerID", forIndexPath: indexPath) as! HeaderView
-        headerView.segmentedControl?.addTarget(self, action: #selector(segmentedControlDidChangeSegmend(_:)), forControlEvents: .ValueChanged)
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! HeaderView
+        headerView.segmentedControl?.addTarget(self, action: #selector(segmentedControlDidChangeSegmend(_:)), for: .valueChanged)
         headerView.locationLabel.text = location
         headerView.avatarImageURL = avatarImageURL
         headerView.userID = userID
         //headerView.avatarImage.hnk_setImageFromURL(avatarImageURL)
-        headerView.avatarImage.sd_setImageWithURL(avatarImageURL, placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+        headerView.avatarImage.sd_setImage(with: avatarImageURL, placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
         
         //Add Border & border color
         headerView.avatarImage.layer.borderWidth = 2.0
-        headerView.avatarImage.layer.borderColor = UIColor.whiteColor().CGColor
+        headerView.avatarImage.layer.borderColor = UIColor.white.cgColor
         //headerView.avatarImage.clipsToBounds = true
         
         /*
@@ -293,13 +293,13 @@ class TeamCollectionViewController: UICollectionViewController {
         headerView.checkIfFollowing(userID)
         
         headerView.segmentedControl.selectedSegmentIndex = selectedIndex
-        let attr = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 16.0)!, forKey: NSFontAttributeName)
-        headerView.segmentedControl.setTitleTextAttributes(attr as [NSObject : AnyObject] , forState: .Normal)
-        headerView.segmentedControl.layer.borderColor = UIColor.whiteColor().CGColor
+        let attr = NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
+        headerView.segmentedControl.setTitleTextAttributes(attr as! [AnyHashable: Any] , for: UIControlState())
+        headerView.segmentedControl.layer.borderColor = UIColor.white.cgColor
         headerView.segmentedControl.layer.cornerRadius = 14.5
         headerView.segmentedControl.clipsToBounds = true
         headerView.segmentedControl.layer.borderWidth = 2
-        headerView.segmentedControl.tintColor = UIColor.whiteColor()
+        headerView.segmentedControl.tintColor = UIColor.white
         //headerView.setAvatar(avatarImageURL)
         return headerView
     }
@@ -312,45 +312,45 @@ class TeamCollectionViewController: UICollectionViewController {
      }
      }*/
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         
         if selectedIndex == 0 {
-            return CGSizeMake(collectionView.frame.width/3, collectionView.frame.width/3)
+            return CGSize(width: collectionView.frame.width/3, height: collectionView.frame.width/3)
         }else if selectedIndex == 1{
-            return CGSizeMake(collectionView.frame.width/6, 55)
+            return CGSize(width: collectionView.frame.width/6, height: 55)
         }else{
-            return CGSizeMake(collectionView.frame.width, 70)
+            return CGSize(width: collectionView.frame.width, height: 70)
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0
     }
     
     // remove lines between cells
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0
         
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch selectedIndex {
         case 0:
-            performSegueWithIdentifier("ShotDetailSegue", sender: indexPath)
+            performSegue(withIdentifier: "ShotDetailSegue", sender: indexPath)
         case 1:
-            performSegueWithIdentifier("ShowUserSegue", sender: indexPath)
+            performSegue(withIdentifier: "ShowUserSegue", sender: indexPath)
         case 2:
-            performSegueWithIdentifier("ProjectShotsSegue", sender: indexPath)
+            performSegue(withIdentifier: "ProjectShotsSegue", sender: indexPath)
         default: break
         }
         
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShotDetailSegue"{
-            let toView = segue.destinationViewController as! ShotDetailViewController
-            let indexPath = sender as! NSIndexPath
+            let toView = segue.destination as! ShotDetailViewController
+            let indexPath = sender as! IndexPath
             guard let shotID = self.shots?[indexPath.row]["id"].int else {return}
             toView.shotID = shotID
         }
@@ -360,14 +360,14 @@ class TeamCollectionViewController: UICollectionViewController {
             toView.teamID = teamID
         }*/
         if segue.identifier == "ShowUserSegue"{
-            let indexPath = sender as! NSIndexPath
-            let toView = segue.destinationViewController as! UserCollectionViewController
+            let indexPath = sender as! IndexPath
+            let toView = segue.destination as! UserCollectionViewController
             toView.userID = self.members?[indexPath.row]["id"].int
 
         }
         if segue.identifier == "ProjectShotsSegue"{
-            let indexPath = sender as! NSIndexPath
-            let toView = segue.destinationViewController as! ProjectShotsCollectionViewController
+            let indexPath = sender as! IndexPath
+            let toView = segue.destination as! ProjectShotsCollectionViewController
             toView.projectID = self.projects?[indexPath.row]["id"].int
             toView.projectTitle = self.projects?[indexPath.row]["name"].string
             toView.isBucket = false

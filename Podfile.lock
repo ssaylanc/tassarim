@@ -1,87 +1,107 @@
 PODS:
-  - Alamofire (3.5.1)
+  - Alamofire (4.3.0)
   - BTNavigationDropdownMenu (0.4.1)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.10)
-  - Gifu (1.2.1)
+  - Fabric (1.6.11)
+  - FirebaseAnalytics (3.6.0):
+    - FirebaseCore (~> 3.4)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.4.7):
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.8)
+  - Gifu (2.0.0)
+  - Google/Analytics (3.0.3):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
   - GoogleAnalytics (3.17.0)
+  - GoogleInterchangeUtilities (1.2.2):
+    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleSymbolUtilities (1.1.2)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - Haneke (1.0.2)
-  - MXParallaxHeader (0.6.0)
-  - NVActivityIndicatorView (2.12)
-  - OAuthSwift (0.6.0)
-  - PageMenu (1.2.9)
-  - RandomColorSwift (0.1.0)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
+  - KeychainAccess (3.0.1)
+  - NVActivityIndicatorView (3.4)
+  - OAuthSwift (1.1.0)
+  - RandomColorSwift (1.0.0)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - Spring (1.0.3)
-  - SwiftyJSON (2.3.3)
-  - UIColor_Hex_Swift (2.3)
+  - SwiftyJSON (3.1.4)
+  - UIColor_Hex_Swift (3.0.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.5)
-  - BTNavigationDropdownMenu
+  - Alamofire (~> 4.3)
+  - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
   - ChameleonFramework/Swift
   - Crashlytics
   - Fabric
   - Gifu
-  - GoogleAnalytics
+  - Google/Analytics
   - Haneke (~> 1.0)
-  - MXParallaxHeader
-  - NVActivityIndicatorView (from `https://github.com/ninjaprox/NVActivityIndicatorView.git`, branch `swift2.3`)
-  - OAuthSwift (from `https://github.com/OAuthSwift/OAuthSwift.git`, branch `swift2.3`)
-  - PageMenu
-  - RandomColorSwift (~> 0.1.0)
-  - SDWebImage (~> 3.8)
-  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift2`)
-  - SwiftyJSON (~> 2.3.2)
-  - UIColor_Hex_Swift (~> 2.1)
+  - KeychainAccess
+  - NVActivityIndicatorView
+  - OAuthSwift (~> 1.1.0)
+  - RandomColorSwift
+  - SDWebImage
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
+  - SwiftyJSON
+  - UIColor_Hex_Swift (~> 3.0.2)
 
 EXTERNAL SOURCES:
-  NVActivityIndicatorView:
-    :branch: swift2.3
-    :git: https://github.com/ninjaprox/NVActivityIndicatorView.git
-  OAuthSwift:
-    :branch: swift2.3
-    :git: https://github.com/OAuthSwift/OAuthSwift.git
+  BTNavigationDropdownMenu:
+    :branch: swift-3.0
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   Spring:
-    :branch: swift2
+    :branch: swift3
     :git: https://github.com/MengTo/Spring.git
 
 CHECKOUT OPTIONS:
-  NVActivityIndicatorView:
-    :commit: ac4325492550b9ec9516e3a9b6e28b2c07faa1c6
-    :git: https://github.com/ninjaprox/NVActivityIndicatorView.git
-  OAuthSwift:
-    :commit: 1733c0f70a147f0c1ed978a8d6e8be997aaac7fa
-    :git: https://github.com/OAuthSwift/OAuthSwift.git
+  BTNavigationDropdownMenu:
+    :commit: 2c08c8579cf7a53ecb3dbf578e6e1034080a9859
+    :git: https://github.com/PhamBaTho/BTNavigationDropdownMenu.git
   Spring:
-    :commit: 18d5c7b74489de8044e34767f856d1e574f0820e
+    :commit: 3a9227c6e9157e7b47f5ac1ee5abab2a56b50002
     :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
-  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
-  BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  BTNavigationDropdownMenu: '093f3cbfad1572f2c222bdf8d17584d1e13380d4'
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
-  Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
-  Gifu: 0eab1ca24a4adbd949338bcb71a8556748cb2d28
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
+  FirebaseCore: 46afaf2c2e0419ea7d3acfb08cf26a461a75fe85
+  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  Gifu: 56a4d8f1092399159fa32662aa2232158b48d8ac
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
+  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
+  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   Haneke: 01454a67322faa0dd9d81fc0f447885044e71521
-  MXParallaxHeader: 2997592b8349baf8557ae0e4346f6b17e141de39
-  NVActivityIndicatorView: de8be03826726ad99cdfacf7fe09e88cbfeef911
-  OAuthSwift: 8895267fbd6437a52aea26541572a617c7a8c7c1
-  PageMenu: ba19ff267f7a19e444e93c20a7847b78954a7011
-  RandomColorSwift: b2e95d6d3670def6d2f907ec7b7041138b268ac9
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  KeychainAccess: 017ea25e313a49eda10bb19b0bb0760fb1edfe1a
+  NVActivityIndicatorView: 5754be63ceecd1df8af37d3c088d81872feeb8b8
+  OAuthSwift: 7ec2c62274f6bdc30b1ba3b799c39a6fdcaea0e5
+  RandomColorSwift: 9f85058b721665d52d239ca166a913e083506444
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
-  SwiftyJSON: 0fd0a115a3c0c09b277d2ab801df154902b942c3
-  UIColor_Hex_Swift: 18bb48e9f1ed16c87f4ea7bf7e03853b43030812
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: 657fdfb903dd04a31b764c707a4f8da55725cb69
+PODFILE CHECKSUM: ee8f3467d573608d6c6ce52ab20cce98f727468d
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.0.1

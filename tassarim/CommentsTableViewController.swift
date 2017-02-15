@@ -29,14 +29,14 @@ class CommentsTableViewController: UITableViewController {
         }
     }
     
-    private func addActivityIndicator() {
+    fileprivate func addActivityIndicator() {
         let frame = CGRect(x: tableView!.center.x - 40 / 2, y: tableView!.center.y - 20, width: 40, height: 40)
-        let activityType = NVActivityIndicatorType.LineScale
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.blackColor())
+        let activityType = NVActivityIndicatorType.lineScale
+        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.black)
         
         if let activityIndicatorView = activityIndicatorView {
             view.addSubview(activityIndicatorView)
-            self.tableView!.separatorStyle = .None
+            self.tableView!.separatorStyle = .none
         }
     }
     
@@ -49,8 +49,8 @@ class CommentsTableViewController: UITableViewController {
     
     func stopActivityIndicatorView() {
         if let indicator = activityIndicatorView {
-            UIView.animateWithDuration(
-                0.6,
+            UIView.animate(
+                withDuration: 0.6,
                 delay: 0.1,
                 usingSpringWithDamping: 0.7,
                 initialSpringVelocity: 0.0,
@@ -63,18 +63,18 @@ class CommentsTableViewController: UITableViewController {
                 }, completion: { _ in
                     indicator.stopAnimating()
                     indicator.removeFromSuperview()
-                    self.tableView!.separatorStyle = .SingleLine
+                    self.tableView!.separatorStyle = .singleLine
             })
         }
     }
     
     var userType: String! = ""
-    @IBAction func designerButtonDidTouch(sender: AnyObject) {
-        let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
+    @IBAction func designerButtonDidTouch(_ sender: AnyObject) {
+        let indexPath = IndexPath(row: sender.tag, section: 0)
         if self.userType == "Team" {
-            performSegueWithIdentifier("TeamSegue", sender: indexPath)
+            performSegue(withIdentifier: "TeamSegue", sender: indexPath)
         }else if self.userType == "Player" {
-            performSegueWithIdentifier("UserSegue", sender: indexPath)
+            performSegue(withIdentifier: "UserSegue", sender: indexPath)
         }
     }
     
@@ -85,20 +85,20 @@ class CommentsTableViewController: UITableViewController {
         self.tableView!.estimatedRowHeight = 69
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GAnalytics.sharedInstance.sendScreenTracking("CommentsView, ID:\(shotID)")
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.comments?.count ?? 0
     }
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell", forIndexPath: indexPath) as! CommentsTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentsTableViewCell
         let type = self.comments?[indexPath.row]["user"]["type"]
         self.userID = self.comments?[indexPath.row]["user"]["id"].int
         self.userName = self.comments?[indexPath.row]["user"]["name"].string
@@ -107,13 +107,13 @@ class CommentsTableViewController: UITableViewController {
         return cell
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "UserSegue"{
-            let toView = segue.destinationViewController as! UserCollectionViewController
+            let toView = segue.destination as! UserCollectionViewController
             let userID = self.userID
             self.navigationController?.title = self.userName
-            self.navigationController?.navigationBar.barTintColor = UIColor(rgba: "#798BF8")
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+            self.navigationController?.navigationBar.barTintColor = UIColor("#798BF8")
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
             toView.userID = userID
@@ -123,11 +123,11 @@ class CommentsTableViewController: UITableViewController {
         }
         
         if segue.identifier == "TeamSegue"{
-            let toView = segue.destinationViewController as! TeamCollectionViewController
+            let toView = segue.destination as! TeamCollectionViewController
             let userID = self.userID
             self.navigationController?.title = self.userName
-            self.navigationController?.navigationBar.barTintColor = UIColor(rgba: "#FFC27E")
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+            self.navigationController?.navigationBar.barTintColor = UIColor("#FFC27E")
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
             toView.userID = userID
@@ -139,9 +139,9 @@ class CommentsTableViewController: UITableViewController {
     
    /* override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row % 2 == 0) {
-            cell.backgroundColor = UIColor(rgba: "#DCDCE8")
+            cell.backgroundColor = UIColor("#DCDCE8")
         }else {
-            cell.backgroundColor = UIColor(rgba: "#E0E5DA")
+            cell.backgroundColor = UIColor("#E0E5DA")
         }
     }*/
     /*override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

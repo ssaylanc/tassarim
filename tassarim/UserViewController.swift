@@ -26,7 +26,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
     var userID: Int!
     var activityIndicatorView : NVActivityIndicatorView!
     
-    @IBAction func followButtonDidTouch(sender: AnyObject) {
+    @IBAction func followButtonDidTouch(_ sender: AnyObject) {
         DribbbleAPI.sharedInstance.isUserFollowed(userID) { (followed) in
             if followed {
                 self.unFollowUser()
@@ -51,14 +51,14 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         DribbbleAPI.sharedInstance.followUser(userID) { (followed) in
             if followed {
-                self.followButton.transform = CGAffineTransformMakeScale(0.6, 0.6)
-                UIView.animateWithDuration(0.3,
+                self.followButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                UIView.animate(withDuration: 0.3,
                                            delay: 0.1,
                                            usingSpringWithDamping: 0.5,
                                            initialSpringVelocity: 1,
-                                           options: .CurveLinear,
+                                           options: .curveLinear,
                                            animations: { _ in
-                                            self.followButton.transform = CGAffineTransformIdentity
+                                            self.followButton.transform = CGAffineTransform.identity
                                             self.setFollowingButton(true)
                     },completion: { _ in}
                 )
@@ -71,14 +71,14 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
     func unFollowUser(){
         DribbbleAPI.sharedInstance.unFollowUser(userID) { (unfollowed) in
             if unfollowed {
-                self.followButton.transform = CGAffineTransformMakeScale(0.6, 0.6)
-                UIView.animateWithDuration(0.3,
+                self.followButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                UIView.animate(withDuration: 0.3,
                                            delay: 0.1,
                                            usingSpringWithDamping: 0.5,
                                            initialSpringVelocity: 1,
-                                           options: .CurveLinear,
+                                           options: .curveLinear,
                                            animations: { _ in
-                                            self.followButton.transform = CGAffineTransformIdentity
+                                            self.followButton.transform = CGAffineTransform.identity
                                             self.setFollowingButton(false)
                     },completion: { _ in}
                 )
@@ -88,33 +88,33 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    func setFollowingButton(followed: Bool){
+    func setFollowingButton(_ followed: Bool){
         if followed == true {
             self.followButton.layer.cornerRadius = self.followButton.frame.size.height/2
-            self.followButton.layer.backgroundColor = UIColorFromRGB(0xF45081).CGColor
-            self.followButton.layer.borderColor = UIColor.clearColor().CGColor
-            self.followButton.layer.shadowColor = UIColorFromRGB(0xF45081).CGColor
+            self.followButton.layer.backgroundColor = UIColorFromRGB(0xF45081).cgColor
+            self.followButton.layer.borderColor = UIColor.clear.cgColor
+            self.followButton.layer.shadowColor = UIColorFromRGB(0xF45081).cgColor
             self.followButton.layer.shadowOpacity = 0.5
             self.followButton.layer.shadowOffset = CGSize(width: 0, height: 5)
             self.followButton.layer.shadowRadius = 5
-            self.followButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            self.followButton.setTitleColor(UIColor.white, for: UIControlState())
         }else{
             self.followButton.layer.cornerRadius = self.followButton.frame.size.height/2
-            self.followButton.layer.backgroundColor = UIColor.clearColor().CGColor
+            self.followButton.layer.backgroundColor = UIColor.clear.cgColor
             self.followButton.layer.borderWidth = 1.0
-            self.followButton.layer.borderColor = UIColorFromRGB(0xAAAAAA).CGColor
-            self.followButton.layer.shadowColor = UIColorFromRGB(0xAAAAAA).CGColor
+            self.followButton.layer.borderColor = UIColorFromRGB(0xAAAAAA).cgColor
+            self.followButton.layer.shadowColor = UIColorFromRGB(0xAAAAAA).cgColor
             self.followButton.layer.shadowOpacity = 0.5
             self.followButton.layer.shadowOffset = CGSize(width: 0, height: 5)
             self.followButton.layer.shadowRadius = 5
-            self.followButton.setTitleColor(UIColorFromRGB(0xAAAAAA), forState: UIControlState.Normal)
+            self.followButton.setTitleColor(UIColorFromRGB(0xAAAAAA), for: UIControlState())
         }
     }
     
-    private func addActivityIndicator() {
+    fileprivate func addActivityIndicator() {
         let frame = CGRect(x: collectionView!.center.x - 40 / 2, y: collectionView!.center.y - 20, width: 40, height: 40)
-        let activityType = NVActivityIndicatorType.LineScale
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.blackColor())
+        let activityType = NVActivityIndicatorType.lineScale
+        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.black)
         if let activityIndicatorView = activityIndicatorView {
             view.addSubview(activityIndicatorView)
         }
@@ -124,14 +124,14 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
         addActivityIndicator()
         if let indicator = activityIndicatorView {
             indicator.startAnimating()
-            self.mainView.hidden = true
+            self.mainView.isHidden = true
         }
     }
     
     func stopActivityIndicatorView() {
         if let indicator = activityIndicatorView {
-            UIView.animateWithDuration(
-                0.6,
+            UIView.animate(
+                withDuration: 0.6,
                 delay: 0.1,
                 usingSpringWithDamping: 0.7,
                 initialSpringVelocity: 0.0,
@@ -144,7 +144,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
                 }, completion: { _ in
                     indicator.stopAnimating()
                     indicator.removeFromSuperview()
-                    self.mainView.hidden = false
+                    self.mainView.isHidden = false
             })
         }
     }
@@ -157,7 +157,7 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.startActivityIndicatorView()
         
         self.profileView.layer.cornerRadius = 10
-        self.profileView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.profileView.layer.shadowColor = UIColor.black.cgColor
         self.profileView.layer.shadowOpacity = 0.4
         self.profileView.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.profileView.layer.shadowRadius = 2
@@ -175,11 +175,11 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.locationLabel.text = self.user?["location"]!.string
                 
                 if let urlAvatar = self.user?["avatar_url"]{
-                    let url = NSURL(string: urlAvatar.stringValue)
-                    self.avatarImage.hnk_setImageFromURL(url!)
+                    let url = URL(string: urlAvatar.stringValue)
+                    self.avatarImage.hnk_setImage(from: url!)
                     self.avatarImage.layer.cornerRadius = 30
                     self.avatarImage.layer.borderWidth = 2
-                    self.avatarImage.layer.borderColor = UIColor.whiteColor().CGColor
+                    self.avatarImage.layer.borderColor = UIColor.white.cgColor
                     self.avatarImage.clipsToBounds = true
                 }
                 let type = self.user?["type"]!.string
@@ -198,43 +198,43 @@ class UserViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.shots?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ShotCell", forIndexPath: indexPath) as! UserShotsCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShotCell", for: indexPath) as! UserShotsCollectionViewCell
         cell.shot = self.shots?[indexPath.row]
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(collectionView.frame.width/3, collectionView.frame.width/3)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/3, height: collectionView.frame.width/3)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0
     }
     
     // remove lines between cells
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("ShotDetailSegue", sender: indexPath)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShotDetailSegue", sender: indexPath)
         
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShotDetailSegue"{
-            let toView = segue.destinationViewController as! ShotDetailViewController
-            let indexPath = sender as! NSIndexPath
+            let toView = segue.destination as! ShotDetailViewController
+            let indexPath = sender as! IndexPath
             guard let shotID = self.shots?[indexPath.row]["id"].int! else {return}
             toView.shotID = shotID
         }

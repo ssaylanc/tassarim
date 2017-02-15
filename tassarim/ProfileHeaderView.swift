@@ -20,13 +20,13 @@ class ProfileHeaderView: UICollectionReusableView {
     @IBOutlet weak var followingCount: UILabel!
     @IBOutlet weak var likesCount: UILabel!
     @IBOutlet weak var followersCount: UILabel!
-    @IBAction func segmentedControlAction(sender: AnyObject) {
+    @IBAction func segmentedControlAction(_ sender: AnyObject) {
        
     }
     
     
     var userID: Int!
-    var avatarImageURL: NSURL!
+    var avatarImageURL: URL!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,21 +35,21 @@ class ProfileHeaderView: UICollectionReusableView {
 
 
 extension ProfileHeaderView {
-    func setAvatar(url: NSURL){
-        self.avatarImage.hnk_setImageFromURL(url)
+    func setAvatar(_ url: URL){
+        self.avatarImage.hnk_setImage(from: url)
         self.avatarImage.layer.cornerRadius = 30
         self.avatarImage.clipsToBounds = true
     }
 }
 
 extension CALayer {
-    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         let maskPath = UIBezierPath(roundedRect: bounds,
                                     byRoundingCorners: corners,
                                     cornerRadii: CGSize(width: radius, height: radius))
         
         let shape = CAShapeLayer()
-        shape.path = maskPath.CGPath
+        shape.path = maskPath.cgPath
         mask = shape
     }
 }

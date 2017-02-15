@@ -11,7 +11,7 @@ import SwiftyJSON
 import NVActivityIndicatorView
 import Gifu
 import SafariServices
-import MXParallaxHeader
+//import MXParallaxHeader
 
 class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,7 +23,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var isProView: UIView!
     @IBOutlet weak var proLabel: UILabel!
-    @IBOutlet weak var shotview: AnimatableImageView!
+    @IBOutlet weak var shotview: GIFImageView!
     @IBOutlet weak var shotImageView: UIImageView!
     @IBOutlet weak var userAvatar: UIImageView!
     @IBOutlet weak var shotTitleLabel: UILabel!
@@ -41,29 +41,29 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     @IBOutlet weak var commentXLayout: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var shotImageBack: UIImageView!
-    @IBAction func shareButtonDidTouch(sender: AnyObject) {
+    @IBAction func shareButtonDidTouch(_ sender: AnyObject) {
         GAnalytics.sharedInstance.trackAction("BUTTON", action: "shareButton", label: "share \(self.shotID)", value: 1)
         let textToShare = "Shared with @tassarimapp"
         guard let url = self.shot?["html_url"]!.string else{return}
-        if let myWebsite = NSURL(string: url) {
-            let objectsToShare = [textToShare, myWebsite]
+        if let myWebsite = URL(string: url) {
+            let objectsToShare = [textToShare, myWebsite] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.popoverPresentationController?.sourceView = sender as? UIView
-            self.presentViewController(activityVC, animated: true, completion: nil)
+            self.present(activityVC, animated: true, completion: nil)
         }
     }
-    @IBAction func bucketButtonDidTouch(sender: AnyObject) {
+    @IBAction func bucketButtonDidTouch(_ sender: AnyObject) {
         if DribbbleAPI.sharedInstance.isAuthenticated() {
             self.showBucket()
         }else{
-            performSegueWithIdentifier("LoginSegue", sender: self)
+            performSegue(withIdentifier: "LoginSegue", sender: self)
             /*let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let loginVC = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginVC")
             self.presentViewController(loginVC, animated: true, completion: nil)*/
         }
     }
     
-    @IBAction func showImageButtonDidTouch(sender: AnyObject) {
+    @IBAction func showImageButtonDidTouch(_ sender: AnyObject) {
         //performSegueWithIdentifier("ImageSegue", sender: nil)
         /*if isDescriptionViewVisible == false {
             //self.descriptionView.hidden = false
@@ -86,17 +86,17 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         }*/
         if isDescriptionViewVisible == false {
             self.isDescriptionViewVisible = true
-            UIView.transitionFromView(shotview, toView: descriptionView , duration: 0.65, options: [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.ShowHideTransitionViews], completion: nil)
+            UIView.transition(from: shotview, to: descriptionView , duration: 0.65, options: [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews], completion: nil)
         }else{
             self.isDescriptionViewVisible = false
-            UIView.transitionFromView(descriptionView, toView: shotview , duration: 0.65, options: [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.ShowHideTransitionViews], completion: nil)
+            UIView.transition(from: descriptionView, to: shotview , duration: 0.65, options: [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews], completion: nil)
         }
     }
     
-    @IBAction func showCommentsButtonDidTouch(sender: AnyObject) {
-        performSegueWithIdentifier("ShowCommentsSegue", sender: nil)
+    @IBAction func showCommentsButtonDidTouch(_ sender: AnyObject) {
+        performSegue(withIdentifier: "ShowCommentsSegue", sender: nil)
     }
-    @IBAction func userButtonDidTouch(sender: AnyObject) {
+    @IBAction func userButtonDidTouch(_ sender: AnyObject) {
         /*if DribbbleAPI.sharedInstance.isAuthenticated() {
             performSegueWithIdentifier("UserSegue", sender: nil)
         }else{
@@ -105,14 +105,14 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
             self.presentViewController(loginVC, animated: true, completion: nil)
         }*/
         if self.userType == "Team" {
-            performSegueWithIdentifier("TeamSegue", sender: nil)
+            performSegue(withIdentifier: "TeamSegue", sender: nil)
         }else if self.userType == "Player" {
-            performSegueWithIdentifier("UserSegue", sender: nil)
+            performSegue(withIdentifier: "UserSegue", sender: nil)
         }
         
     }
     
-    @IBAction func likeButtonDidTouch(sender: AnyObject) {
+    @IBAction func likeButtonDidTouch(_ sender: AnyObject) {
         if DribbbleAPI.sharedInstance.isAuthenticated() {
             DribbbleAPI.sharedInstance.isLiked(shotID) { (liked) in
                 if liked {
@@ -122,7 +122,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                 }
             }
         }else{
-            performSegueWithIdentifier("LoginSegue", sender: self)
+            performSegue(withIdentifier: "LoginSegue", sender: self)
             /*let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let loginVC = mainStoryBoard.instantiateViewControllerWithIdentifier("LoginVC")
             self.presentViewController(loginVC, animated: true, completion: nil)*/
@@ -140,14 +140,14 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         DribbbleAPI.sharedInstance.likeAShot(shotID) { (liked) in
             if liked {
                 GAnalytics.sharedInstance.trackAction("BUTTON", action: "likeAShot", label: "like \(self.shotID)", value: 1)
-                self.likeButton.transform = CGAffineTransformMakeScale(0.6, 0.6)
-                UIView.animateWithDuration(0.3,
+                self.likeButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                UIView.animate(withDuration: 0.3,
                         delay: 0.1,
                         usingSpringWithDamping: 0.5,
                         initialSpringVelocity: 1,
-                        options: .CurveLinear,
+                        options: .curveLinear,
                         animations: { _ in
-                             self.likeButton.transform = CGAffineTransformIdentity
+                             self.likeButton.transform = CGAffineTransform.identity
                              self.setLikeStatus(true)
                     },
                     completion: { _ in
@@ -175,14 +175,14 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         DribbbleAPI.sharedInstance.unlikeAShot(shotID) { (unliked) in
             if unliked {
                 GAnalytics.sharedInstance.trackAction("BUTTON", action: "unlikeAShot", label: "unlike \(self.shotID)", value: 1)
-                self.likeButton.transform = CGAffineTransformMakeScale(0.6, 0.6)
-                UIView.animateWithDuration(0.3,
+                self.likeButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+                UIView.animate(withDuration: 0.3,
                                            delay: 0.1,
                                            usingSpringWithDamping: 0.5,
                                            initialSpringVelocity: 1,
-                                           options: .CurveLinear,
+                                           options: .curveLinear,
                                            animations: { _ in
-                                            self.likeButton.transform = CGAffineTransformIdentity
+                                            self.likeButton.transform = CGAffineTransform.identity
                                             self.setLikeStatus(false)
                     },
                                            completion: { _ in
@@ -202,49 +202,49 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     var button1Tapped: Bool = false
     var button2Tapped: Bool = false
     var button3Tapped: Bool = false
-    @IBAction func button1DidTouch(sender: AnyObject) {
+    @IBAction func button1DidTouch(_ sender: AnyObject) {
         if att1URL != "" {
-            let targetURL = NSURL(string: att1URL)
+            let targetURL = URL(string: att1URL)
             if #available(iOS 9.0, *) {
-                let vc = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: true)
+                let vc = SFSafariViewController(url: targetURL!, entersReaderIfAvailable: true)
                 vc.delegate = self
-                presentViewController(vc, animated: true, completion: nil)
+                present(vc, animated: true, completion: nil)
             } else {
-                performSegueWithIdentifier("WebSegue", sender: self)
+                performSegue(withIdentifier: "WebSegue", sender: self)
                 self.button1Tapped = true
             }
         }
     }
-    @IBAction func button2DidTouch(sender: AnyObject) {
+    @IBAction func button2DidTouch(_ sender: AnyObject) {
         if att2URL != "" {
-            let targetURL = NSURL(string: att2URL)
+            let targetURL = URL(string: att2URL)
             if #available(iOS 9.0, *) {
-                let vc = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: true)
+                let vc = SFSafariViewController(url: targetURL!, entersReaderIfAvailable: true)
                 vc.delegate = self
-                presentViewController(vc, animated: true, completion: nil)
+                present(vc, animated: true, completion: nil)
             } else {
-                performSegueWithIdentifier("WebSegue", sender: self)
+                performSegue(withIdentifier: "WebSegue", sender: self)
                 self.button2Tapped = true
             }
         }
     }
-    @IBAction func button3DidTouch(sender: AnyObject) {
+    @IBAction func button3DidTouch(_ sender: AnyObject) {
         if att3URL != "" {
-            let targetURL = NSURL(string: att3URL)
+            let targetURL = URL(string: att3URL)
             if #available(iOS 9.0, *) {
-                let vc = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: true)
+                let vc = SFSafariViewController(url: targetURL!, entersReaderIfAvailable: true)
                 vc.delegate = self
-                presentViewController(vc, animated: true, completion: nil)
+                present(vc, animated: true, completion: nil)
             } else {
-                performSegueWithIdentifier("WebSegue", sender: self)
+                performSegue(withIdentifier: "WebSegue", sender: self)
                 self.button3Tapped = true
             }
         }
     }
     
     var isDescriptionViewVisible: Bool = false
-    var animationOptionsRight = [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.ShowHideTransitionViews]
-    var animationOptionsLeft = [UIViewAnimationOptions.TransitionFlipFromRight, UIViewAnimationOptions.ShowHideTransitionViews]
+    var animationOptionsRight = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
+    var animationOptionsLeft = [UIViewAnimationOptions.transitionFlipFromRight, UIViewAnimationOptions.showHideTransitionViews]
 
     var shotID: Int!
     var shot: [String:JSON]? = [:]
@@ -258,14 +258,14 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     var activityIndicatorView : NVActivityIndicatorView!
     var myView : UIView!
     
-    private func addActivityIndicator() {
+    fileprivate func addActivityIndicator() {
         let frame = CGRect(x: view!.center.x - 40 / 2, y: view!.center.y - 20, width: 40, height: 40)
-        let activityType = NVActivityIndicatorType.LineScale
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.blackColor())
+        let activityType = NVActivityIndicatorType.lineScale
+        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.black)
         
         myView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         self.view.addSubview(myView)
-        myView.backgroundColor = UIColor(rgba: "#E0E5DA")
+        myView.backgroundColor = UIColor("#E0E5DA")
         view.addSubview(myView)
 
         if let activityIndicatorView = activityIndicatorView {
@@ -275,28 +275,28 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     }
     
     
-    func setLikeStatus(status: Bool) {
+    func setLikeStatus(_ status: Bool) {
         if status == true {
             self.likeButton.layer.cornerRadius = self.likeButton.frame.size.height/2
-            self.likeButton.layer.backgroundColor = UIColorFromRGB(0xF45081).CGColor
-            self.likeButton.layer.borderColor = UIColor.clearColor().CGColor
-            self.likeButton.layer.shadowColor = UIColorFromRGB(0xF45081).CGColor
+            self.likeButton.layer.backgroundColor = UIColorFromRGB(0xF45081).cgColor
+            self.likeButton.layer.borderColor = UIColor.clear.cgColor
+            self.likeButton.layer.shadowColor = UIColorFromRGB(0xF45081).cgColor
             self.likeButton.layer.shadowOpacity = 0.5
             self.likeButton.layer.shadowOffset = CGSize(width: 0, height: 5)
             self.likeButton.layer.shadowRadius = 5
-            self.likeButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            self.likeButton.setTitle("Like", forState: UIControlState.Normal)
+            self.likeButton.setTitleColor(UIColor.white, for: UIControlState())
+            self.likeButton.setTitle("Like", for: UIControlState())
         }else{
             self.likeButton.layer.cornerRadius = self.likeButton.frame.size.height/2
-            self.likeButton.layer.backgroundColor = UIColor.clearColor().CGColor
+            self.likeButton.layer.backgroundColor = UIColor.clear.cgColor
             self.likeButton.layer.borderWidth = 1.0
-            self.likeButton.layer.borderColor = UIColorFromRGB(0xAAAAAA).CGColor
-            self.likeButton.layer.shadowColor = UIColorFromRGB(0xAAAAAA).CGColor
+            self.likeButton.layer.borderColor = UIColorFromRGB(0xAAAAAA).cgColor
+            self.likeButton.layer.shadowColor = UIColorFromRGB(0xAAAAAA).cgColor
             self.likeButton.layer.shadowOpacity = 0.5
             self.likeButton.layer.shadowOffset = CGSize(width: 0, height: 5)
             self.likeButton.layer.shadowRadius = 5
-            self.likeButton.setTitleColor(UIColorFromRGB(0xAAAAAA), forState: UIControlState.Normal)
-            self.likeButton.setTitle("Like?", forState: UIControlState.Normal)
+            self.likeButton.setTitleColor(UIColorFromRGB(0xAAAAAA), for: UIControlState())
+            self.likeButton.setTitle("Like?", for: UIControlState())
         }
     }
     func startActivityIndicatorView() {
@@ -309,8 +309,8 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     
     func stopActivityIndicatorView() {
         if let indicator = activityIndicatorView {
-            UIView.animateWithDuration(
-                0.6,
+            UIView.animate(
+                withDuration: 0.6,
                 delay: 0.1,
                 usingSpringWithDamping: 0.7,
                 initialSpringVelocity: 0.0,
@@ -328,20 +328,20 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         }
     }
     func openBrowser() {
-        let targetURL = NSURL(string: self.openUrl)
+        let targetURL = URL(string: self.openUrl)
         if #available(iOS 9.0, *) {
-            let vc = SFSafariViewController(URL: targetURL!, entersReaderIfAvailable: true)
+            let vc = SFSafariViewController(url: targetURL!, entersReaderIfAvailable: true)
             vc.delegate = self
             
-            presentViewController(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
             
         } else {
-            performSegueWithIdentifier("WebSegue", sender: self)
+            performSegue(withIdentifier: "WebSegue", sender: self)
         }
     }
     
     func openComments() {
-        performSegueWithIdentifier("ShowCommentsSegue", sender: nil)
+        performSegue(withIdentifier: "ShowCommentsSegue", sender: nil)
     }
     
     func createButtons() {
@@ -355,15 +355,15 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
             }
         }else {
             self.likeButton.layer.cornerRadius = self.likeButton.frame.size.height/2
-            self.likeButton.layer.backgroundColor = UIColor.clearColor().CGColor
+            self.likeButton.layer.backgroundColor = UIColor.clear.cgColor
             self.likeButton.layer.borderWidth = 1.0
-            self.likeButton.layer.borderColor = UIColorFromRGB(0xAAAAAA).CGColor
-            self.likeButton.layer.shadowColor = UIColorFromRGB(0xAAAAAA).CGColor
+            self.likeButton.layer.borderColor = UIColorFromRGB(0xAAAAAA).cgColor
+            self.likeButton.layer.shadowColor = UIColorFromRGB(0xAAAAAA).cgColor
             self.likeButton.layer.shadowOpacity = 0.5
             self.likeButton.layer.shadowOffset = CGSize(width: 0, height: 5)
             self.likeButton.layer.shadowRadius = 5
-            self.likeButton.setTitleColor(UIColorFromRGB(0xAAAAAA), forState: UIControlState.Normal)
-            self.likeButton.setTitle("Like?", forState: UIControlState.Normal)
+            self.likeButton.setTitleColor(UIColorFromRGB(0xAAAAAA), for: UIControlState())
+            self.likeButton.setTitle("Like?", for: UIControlState())
             
             /*self.likeButton.hidden = true
             self.shareButton.hidden = true
@@ -376,29 +376,29 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         }
         
         self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/2
-        self.shareButton.layer.shadowColor = UIColorFromRGB(0xF18B68).CGColor
+        self.shareButton.layer.shadowColor = UIColorFromRGB(0xF18B68).cgColor
         self.shareButton.layer.shadowOpacity = 0.5
         self.shareButton.layer.shadowOffset = CGSize(width: 0, height: 5)
         self.shareButton.layer.shadowRadius = 5
         
         self.bucketButton.layer.cornerRadius = self.bucketButton.frame.size.height/2
-        self.bucketButton.layer.shadowColor = UIColorFromRGB(0x35B486).CGColor
+        self.bucketButton.layer.shadowColor = UIColorFromRGB(0x35B486).cgColor
         self.bucketButton.layer.shadowOpacity = 0.5
         self.bucketButton.layer.shadowOffset = CGSize(width: 0, height: 5)
         self.bucketButton.layer.shadowRadius = 5
         
         self.commentsButton.layer.cornerRadius = self.commentsButton.frame.size.height/2
         //self.commentsButton.clipsToBounds = true
-        self.commentsButton.layer.shadowColor = UIColorFromRGB(0x398EE6).CGColor
+        self.commentsButton.layer.shadowColor = UIColorFromRGB(0x398EE6).cgColor
         self.commentsButton.layer.shadowOpacity = 0.5
         self.commentsButton.layer.shadowOffset = CGSize(width: 0, height: 5)
         self.commentsButton.layer.shadowRadius = 5
         
         let button = UIButton()
-        button.frame = CGRectMake(0, 0, 20, 20)
-        button.setImage(UIImage(named: "net-internet"), forState: .Normal)
+        button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        button.setImage(UIImage(named: "net-internet"), for: UIControlState())
         //let url =
-        button.addTarget(self, action: #selector(ShotDetailViewController.openBrowser), forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(ShotDetailViewController.openBrowser), for: UIControlEvents.touchUpInside)
         let barButton = UIBarButtonItem()
         barButton.customView = button
         self.navigationItem.rightBarButtonItem = barButton
@@ -406,7 +406,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bucketView.hidden = true
+        self.bucketView.isHidden = true
         self.bucketTableView.delegate = self
         self.bucketTableView.dataSource = self
         
@@ -431,7 +431,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         
         self.profileView.layer.cornerRadius = 5.0
         //self.profileView.clipsToBounds = true
-        self.profileView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.profileView.layer.shadowColor = UIColor.black.cgColor
         self.profileView.layer.shadowOpacity = 0.2
         self.profileView.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.profileView.layer.shadowRadius = 2
@@ -445,7 +445,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                     
                     self.attachmentCollection.layer.cornerRadius = 5
                     //self.attachmentCollection.clipsToBounds = true
-                    self.attachmentCollection.layer.shadowColor = UIColor.blackColor().CGColor
+                    self.attachmentCollection.layer.shadowColor = UIColor.black.cgColor
                     self.attachmentCollection.layer.shadowOpacity = 0.2
                     self.attachmentCollection.layer.shadowOffset = CGSize(width: 0, height: 2)
                     self.attachmentCollection.layer.shadowRadius = 2
@@ -454,48 +454,48 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                     guard let url = self.attachments?[0]["url"].string else{return}
                     self.att1URL = url
 
-                    let url1 = NSURL(string: urlString1.stringValue)
-                    self.attachedImage1.sd_setImageWithURL(url1!)
+                    let url1 = URL(string: urlString1.stringValue)
+                    self.attachedImage1.sd_setImage(with: url1!)
                     self.attachedImage1.layer.cornerRadius = 5
                     self.attachedImage1.clipsToBounds = true
-                    self.attachedImage1.layer.shadowColor = UIColorFromRGB(0xAAAAAA).CGColor
+                    self.attachedImage1.layer.shadowColor = UIColorFromRGB(0xAAAAAA).cgColor
                     self.attachedImage1.layer.shadowOpacity = 0.5
                     self.attachedImage1.layer.shadowOffset = CGSize(width: 0, height: 2)
                     self.attachedImage1.layer.shadowRadius = 2
 
-                    self.button1.hidden = false
-                    self.button2.hidden = true
-                    self.button3.hidden = true
+                    self.button1.isHidden = false
+                    self.button2.isHidden = true
+                    self.button3.isHidden = true
                     
                     if self.attachments!.count > 1{
                         guard let urlString2 = self.attachments?[1]["thumbnail_url"] else{return}
                         guard let url = self.attachments?[1]["url"].string else{return}
                         self.att2URL = url
-                        let url2 = NSURL(string: urlString2.stringValue)
-                        self.attachedImage2.sd_setImageWithURL(url2!)
+                        let url2 = URL(string: urlString2.stringValue)
+                        self.attachedImage2.sd_setImage(with: url2!)
                         self.attachedImage2.layer.cornerRadius = 5
                         self.attachedImage2.clipsToBounds = true
-                        self.attachedImage2.layer.shadowColor = UIColorFromRGB(0xAAAAAA).CGColor
+                        self.attachedImage2.layer.shadowColor = UIColorFromRGB(0xAAAAAA).cgColor
                         self.attachedImage2.layer.shadowOpacity = 0.5
                         self.attachedImage2.layer.shadowOffset = CGSize(width: 0, height: 2)
                         self.attachedImage2.layer.shadowRadius = 2
-                        self.button3.hidden = true
+                        self.button3.isHidden = true
                     }
                     if self.attachments!.count == 3 {
                         guard let urlString3 = self.attachments?[2]["thumbnail_url"].stringValue else{return}
                         guard let url = self.attachments?[2]["url"].string else{return}
                         self.att3URL = url
-                        let url3 = NSURL(string: urlString3)
-                        self.attachedImage3.sd_setImageWithURL(url3!)
+                        let url3 = URL(string: urlString3)
+                        self.attachedImage3.sd_setImage(with: url3!)
                         self.attachedImage3.layer.cornerRadius = 5
                         self.attachedImage3.clipsToBounds = true
-                        self.attachedImage3.layer.shadowColor = UIColorFromRGB(0xAAAAAA).CGColor
+                        self.attachedImage3.layer.shadowColor = UIColorFromRGB(0xAAAAAA).cgColor
                         self.attachedImage3.layer.shadowOpacity = 0.5
                         self.attachedImage3.layer.shadowOffset = CGSize(width: 0, height: 2)
                         self.attachedImage3.layer.shadowRadius = 2
                     }
                 }else{
-                    self.attachmentCollection.hidden = true
+                    self.attachmentCollection.isHidden = true
                 }
             }
         }
@@ -508,48 +508,63 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
 
                 if let isAnimated = self.shot?["animated"]?.bool {
                     if !isAnimated {
-                        if let urlString = self.shot?["images"]!["normal"].string where urlString.characters.count > 0{
-                            let url = NSURL(string: urlString)
-                            if let data = NSData(contentsOfURL: url!) {
-                                self.shotview.animateWithImageData(data)
+                        if let urlString = self.shot?["images"]!["normal"].string, urlString.characters.count > 0{
+                            let url = URL(string: urlString)
+                            if let data = try? Data(contentsOf: url!) {
+                                //self.shotview.animate(withGIFData: data)
+                                self.shotview.sd_setImage(with: url!)
                                 self.shotview.layer.cornerRadius = 10
                                 self.shotview.clipsToBounds = true
                                 //Setup the back shot Image with blur effect
-                                self.shotImageBack.sd_setImageWithURL(url!)
-                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                self.shotImageBack.sd_setImage(with: url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
                                 let blurEffectView = UIVisualEffectView(effect: blurEffect)
                                 blurEffectView.frame = self.shotImageBack.bounds
-                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                                 self.shotImageBack.addSubview(blurEffectView)
                             }
+                            /*URLSession.shared.dataTask(with: url!, completionHandler:
+                                { (data, response, error) in
+                                    
+                                    // Error handling
+                                    if error != nil {
+                                        print("error: \(error)")
+                                        return
+                                    }
+                                    
+                                    // Async repsonse
+                                    DispatchQueue.main.async(execute: {
+                                        self.shotview.animate(withGIFData: data!)
+                                    })
+                            }).resume()*/
                         }
                     }else{
-                        if let urlString = self.shot?["images"]!["hidpi"].string where urlString.characters.count > 0{
-                            let url = NSURL(string: urlString)
-                            if let data = NSData(contentsOfURL: url!) {
-                                self.shotview.animateWithImageData(data)
+                        if let urlString = self.shot?["images"]!["hidpi"].string, urlString.characters.count > 0{
+                            let url = URL(string: urlString)
+                            if let data = try? Data(contentsOf: url!) {
+                                self.shotview.animate(withGIFData: data)
                                 self.shotview.layer.cornerRadius = 10
                                 self.shotview.clipsToBounds = true
                                 //Setup the back shot Image with blur effect
-                                self.shotImageBack.sd_setImageWithURL(url!)
-                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                self.shotImageBack.sd_setImage(with: url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
                                 let blurEffectView = UIVisualEffectView(effect: blurEffect)
                                 blurEffectView.frame = self.shotImageBack.bounds
-                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                                 self.shotImageBack.addSubview(blurEffectView)
                             }
-                        }else if let urlString = self.shot?["images"]!["normal"].string where urlString.characters.count > 0{
-                            let url = NSURL(string: urlString)
-                            if let data = NSData(contentsOfURL: url!) {
-                                self.shotview.animateWithImageData(data)
+                        }else if let urlString = self.shot?["images"]!["normal"].string, urlString.characters.count > 0{
+                            let url = URL(string: urlString)
+                            if let data = try? Data(contentsOf: url!) {
+                                self.shotview.animate(withGIFData: data)
                                 self.shotview.layer.cornerRadius = 10
                                 self.shotview.clipsToBounds = true
                                 //Setup the back shot Image with blur effect
-                                self.shotImageBack.sd_setImageWithURL(url!)
-                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                self.shotImageBack.sd_setImage(with: url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
                                 let blurEffectView = UIVisualEffectView(effect: blurEffect)
                                 blurEffectView.frame = self.shotImageBack.bounds
-                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                                 self.shotImageBack.addSubview(blurEffectView)
                             }
                         }
@@ -578,11 +593,11 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                 }*/
             
                 if let urlAvatar = self.shot?["user"]!["avatar_url"]{
-                    let url = NSURL(string: urlAvatar.stringValue)
-                    self.userAvatar.sd_setImageWithURL(url!)
+                    let url = URL(string: urlAvatar.stringValue)
+                    self.userAvatar.sd_setImage(with: url!)
                     self.userAvatar.layer.cornerRadius = self.userAvatar.frame.size.width/2
                     //self.userAvatar.layer.borderWidth = 2
-                    //self.userAvatar.layer.borderColor = UIColor(rgba: "#46454B").CGColor
+                    //self.userAvatar.layer.borderColor = UIColor("#46454B").CGColor
                     self.userAvatar.clipsToBounds = true
                 }
                 
@@ -599,7 +614,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                 self.title = self.shot?["user"]!["name"].string
                 if let description_text = self.shot?["description"]?.string {
                     let attrStr = try! NSAttributedString(
-                        data: description_text.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+                        data: description_text.data(using: String.Encoding.unicode, allowLossyConversion: true)!,
                         options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
                         documentAttributes: nil)
                         self.descriptionLabel.attributedText = attrStr
@@ -615,12 +630,12 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                 self.userType = type?.string
                 if type == "Player" {
                     if let isPro = self.shot?["user"]!["pro"]{
-                        if isPro{
+                        if isPro.boolValue{
                             self.proLabel.text = "Pro"
                             self.isProView.layer.cornerRadius = 6
                             self.isProView.clipsToBounds = true
                         }else{
-                            self.isProView.hidden = true
+                            self.isProView.isHidden = true
                         }
                     }
                 }else if type == "Team" {
@@ -635,9 +650,9 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     }
 
     override func viewDidLayoutSubviews() {
-        scrollView.scrollEnabled = true
+        scrollView.isScrollEnabled = true
         // Do any additional setup after loading the view
-        scrollView.contentSize = CGSizeMake(320, 500)
+        scrollView.contentSize = CGSize(width: 320, height: 500)
     }
     
     /*func loadUserShots(){
@@ -649,32 +664,32 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         
     }*/
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ImageSegue"{
-            let toView = segue.destinationViewController as! ImageViewController
+            let toView = segue.destination as! ImageViewController
             if let shotURL = self.shot?["images"]!["normal"]{
-                let url = NSURL(string: shotURL.stringValue)
+                let url = URL(string: shotURL.stringValue)
                 toView.shotURL = url
             }
         }
         
         if segue.identifier == "UserSegue"{
-            let toView = segue.destinationViewController as! UserCollectionViewController
+            let toView = segue.destination as! UserCollectionViewController
             let userID = self.shot?["user"]!["id"].int
             self.navigationController?.title = self.shot?["user"]!["name"].string
-            self.navigationController?.navigationBar.barTintColor = UIColor(rgba: "#798BF8")
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+            self.navigationController?.navigationBar.barTintColor = UIColor("#798BF8")
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
             toView.userID = userID
         }
         
         if segue.identifier == "TeamSegue"{
-            let toView = segue.destinationViewController as! TeamCollectionViewController
+            let toView = segue.destination as! TeamCollectionViewController
             let userID = self.shot?["user"]!["id"].int
             self.navigationController?.title = self.shot?["user"]!["name"].string
-            self.navigationController?.navigationBar.barTintColor = UIColor(rgba: "#FFC27E")
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+            self.navigationController?.navigationBar.barTintColor = UIColor("#FFC27E")
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             self.navigationController?.navigationBar.shadowImage = UIImage()
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
             toView.userID = userID
@@ -693,7 +708,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
             }
         }*/
         if segue.identifier == "ShowCommentsSegue" {
-            let toView = segue.destinationViewController as! CommentsTableViewController
+            let toView = segue.destination as! CommentsTableViewController
             toView.shotID = shotID
             toView.title = self.shotTitleLabel.text
             GAnalytics.sharedInstance.trackAction("BUTTON", action: "showComment", label: "comment \(self.shotID)", value: 1)
@@ -709,9 +724,9 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
     let blackView = UIView()
 
     func showBucket(){
-        self.bucketTableView.separatorStyle = .None
+        self.bucketTableView.separatorStyle = .none
         self.loadBucketList()
-        if let window = UIApplication.sharedApplication().keyWindow {
+        if let window = UIApplication.shared.keyWindow {
             blackView.backgroundColor = UIColor(white: 0 , alpha: 0.5)
             
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
@@ -730,21 +745,21 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
             
             let height: CGFloat = 250
             let y = window.frame.height - height
-            bucketTableView.frame = CGRectMake(0, window.frame.height, window.frame.width, 250)
+            bucketTableView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: 250)
             blackView.frame = window.frame
             blackView.alpha = 0
-            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .CurveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: UIViewAnimationOptions(), animations: {
                 self.blackView.alpha = 1
-                self.bucketTableView.frame = CGRectMake(0, y, self.bucketTableView.frame.width, self.bucketTableView.frame.height)
+                self.bucketTableView.frame = CGRect(x: 0, y: y, width: self.bucketTableView.frame.width, height: self.bucketTableView.frame.height)
                 }, completion: nil)
         }
     }
     
     func handleDismiss() {
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.blackView.alpha = 0
-            if let window = UIApplication.sharedApplication().keyWindow {
-                self.bucketTableView.frame = CGRectMake(0, window.frame.height, self.bucketTableView.frame.width, self.bucketTableView.frame.height)
+            if let window = UIApplication.shared.keyWindow {
+                self.bucketTableView.frame = CGRect(x: 0, y: window.frame.height, width: self.bucketTableView.frame.width, height: self.bucketTableView.frame.height)
             }
         })
     }
@@ -761,16 +776,16 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.buckets?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BucketCell", forIndexPath: indexPath) as! BucketListTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BucketCell", for: indexPath) as! BucketListTableViewCell
         
         cell.bucketNameLabel.text = self.buckets?[indexPath.row]["name"].string
         cell.bucketImage.image = UIImage(named: "bucket")
@@ -781,7 +796,7 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         bucketID = self.buckets?[indexPath.row]["id"].int
         self.startActivityIndicatorView()
         DribbbleAPI.sharedInstance.updateBucket(bucketID, shotID: shotID) { (response) in
@@ -792,18 +807,18 @@ class ShotDetailViewController: UIViewController, SFSafariViewControllerDelegate
                 print("bucket başarısız")
             }
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.barTintColor = UIColor(rgba: "#F45081")
+        self.navigationController!.navigationBar.barTintColor = UIColor("#F45081")
         GAnalytics.sharedInstance.sendScreenTracking("ShotDetailView, ID:\(shotID)")
     }
     
     override func viewWillLayoutSubviews(){
         super.viewWillLayoutSubviews()
-        self.scrollView.scrollEnabled = true
+        self.scrollView.isScrollEnabled = true
 
         // Add extra 15pt on the `top` of scrollView.
         //self.scrollView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)

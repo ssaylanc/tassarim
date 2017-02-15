@@ -13,7 +13,7 @@ import NVActivityIndicatorView
 
 class ShotDetailAlternativeViewController: UIViewController {
 
-    @IBOutlet weak var shotImageFront: AnimatableImageView!
+    @IBOutlet weak var shotImageFront: GIFImageView!
     @IBOutlet weak var shotImageBack: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var shotTitleLabel: UILabel!
@@ -29,30 +29,30 @@ class ShotDetailAlternativeViewController: UIViewController {
     var activityIndicatorView : NVActivityIndicatorView!
     
     @IBOutlet weak var likeButton: UIButton!
-    @IBAction func likeButtonDidTouch(sender: AnyObject) {
-        self.likeButton.transform = CGAffineTransformMakeScale(0.6, 0.6)
-        UIView.animateWithDuration(0.3,
+    @IBAction func likeButtonDidTouch(_ sender: AnyObject) {
+        self.likeButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        UIView.animate(withDuration: 0.3,
                                    delay: 0.1,
                                    usingSpringWithDamping: 0.5,
                                    initialSpringVelocity: 1,
-                                   options: .CurveLinear,
+                                   options: .curveLinear,
                                    animations: { _ in
-                                    self.likeButton.transform = CGAffineTransformIdentity
-                                    self.likeButton.setImage(UIImage(named: "cel-heart-selected.png"), forState: UIControlState.Normal)
+                                    self.likeButton.transform = CGAffineTransform.identity
+                                    self.likeButton.setImage(UIImage(named: "cel-heart-selected.png"), for: UIControlState())
             },
                                    completion: { _ in
             }
         )
     }
     
-    private func addActivityIndicator() {
+    fileprivate func addActivityIndicator() {
         let frame = CGRect(x: view!.center.x - 40 / 2, y: view!.center.y - 20, width: 40, height: 40)
-        let activityType = NVActivityIndicatorType.LineScale
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.whiteColor())
+        let activityType = NVActivityIndicatorType.lineScale
+        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.white)
         
             myView = UIView(frame: CGRect(x: 0, y: 0, width: view!.frame.width, height: view!.frame.height))
             self.view.addSubview(myView)
-            myView.backgroundColor = UIColor(rgba: "#F45081")
+            myView.backgroundColor = UIColor("#F45081")
             view.addSubview(myView)
             if let activityIndicatorView = activityIndicatorView {
                 myView.addSubview(activityIndicatorView)
@@ -64,14 +64,14 @@ class ShotDetailAlternativeViewController: UIViewController {
         addActivityIndicator()
         if let indicator = activityIndicatorView {
             indicator.startAnimating()
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
     }
     
     func stopActivityIndicatorView() {
         if let indicator = activityIndicatorView {
-            UIView.animateWithDuration(
-                0.6,
+            UIView.animate(
+                withDuration: 0.6,
                 delay: 0.1,
                 usingSpringWithDamping: 0.7,
                 initialSpringVelocity: 0.0,
@@ -83,7 +83,7 @@ class ShotDetailAlternativeViewController: UIViewController {
                     self.view.layoutIfNeeded()
                 }, completion: { _ in
                     indicator.stopAnimating()
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.myView.removeFromSuperview()
                     indicator.removeFromSuperview()
             })
@@ -94,11 +94,11 @@ class ShotDetailAlternativeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.isTranslucent = true
         self.startActivityIndicatorView()
         
         DribbbleAPI.sharedInstance.loadShot(shotID) { (shot) in
@@ -109,19 +109,18 @@ class ShotDetailAlternativeViewController: UIViewController {
                 self.openUrl = self.shot?["html_url"]?.stringValue
                 if let isAnimated = self.shot?["animated"]?.bool {
                     if !isAnimated {
-                        if let urlString = self.shot?["images"]!["normal"].string where urlString.characters.count > 0{
-                            let url = NSURL(string: urlString)
-                            if let data = NSData(contentsOfURL: url!) {
+                        if let urlString = self.shot?["images"]!["normal"].string, urlString.characters.count > 0{
+                            let url = URL(string: urlString)
+                            if let data = try? Data(contentsOf: url!) {
                                 //Setup the front shot Image
-                                self.shotImageFront.animateWithImageData(data)
-                                //Add Shadow
-                                self.shotCornerView.layer.shadowColor = UIColor.blackColor().CGColor
+                                self.shotImageFront.animate(withGIFData: data)                                //Add Shadow
+                                self.shotCornerView.layer.shadowColor = UIColor.black.cgColor
                                 self.shotCornerView.layer.shadowOpacity = 0.5
-                                self.shotCornerView.layer.shadowOffset = CGSizeMake(0, 10)
+                                self.shotCornerView.layer.shadowOffset = CGSize(width: 0, height: 10)
                                 self.shotCornerView.layer.shadowRadius = 5
-                                self.shotCornerView.layer.shadowPath = UIBezierPath(roundedRect: self.shotCornerView.bounds, cornerRadius: self.shotCornerView.layer.cornerRadius).CGPath
+                                self.shotCornerView.layer.shadowPath = UIBezierPath(roundedRect: self.shotCornerView.bounds, cornerRadius: self.shotCornerView.layer.cornerRadius).cgPath
                                 self.shotCornerView.layer.shouldRasterize = true
-                                self.shotCornerView.layer.rasterizationScale = UIScreen.mainScreen().scale
+                                self.shotCornerView.layer.rasterizationScale = UIScreen.main.scale
                                 //Add Corner Radius
                                 let borderView = UIView()
                                 borderView.frame = self.shotCornerView.bounds
@@ -135,28 +134,28 @@ class ShotDetailAlternativeViewController: UIViewController {
                                 borderView.addSubview(self.shotImageFront)
                                 
                                 //Setup the back shot Image with blur effect
-                                self.shotImageBack.sd_setImageWithURL(url!)
-                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                self.shotImageBack.sd_setImage(with: url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
                                 let blurEffectView = UIVisualEffectView(effect: blurEffect)
                                 blurEffectView.frame = self.shotImageBack.bounds
-                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                                 self.shotImageBack.addSubview(blurEffectView)
                             }
                         }
                     }else{
-                        if let urlString = self.shot?["images"]!["hidpi"].string where urlString.characters.count > 0{
-                            let url = NSURL(string: urlString)
-                            if let data = NSData(contentsOfURL: url!) {
+                        if let urlString = self.shot?["images"]!["hidpi"].string, urlString.characters.count > 0{
+                            let url = URL(string: urlString)
+                            if let data = try? Data(contentsOf: url!) {
                                 //Setup the front shot Image
-                                self.shotImageFront.animateWithImageData(data)
+                                self.shotImageFront.animate(withGIFData: data)
                                 //Add Shadow
-                                self.shotCornerView.layer.shadowColor = UIColor.blackColor().CGColor
+                                self.shotCornerView.layer.shadowColor = UIColor.black.cgColor
                                 self.shotCornerView.layer.shadowOpacity = 0.5
-                                self.shotCornerView.layer.shadowOffset = CGSizeMake(0, 5)
+                                self.shotCornerView.layer.shadowOffset = CGSize(width: 0, height: 5)
                                 self.shotCornerView.layer.shadowRadius = 5
-                                self.shotCornerView.layer.shadowPath = UIBezierPath(roundedRect: self.shotCornerView.bounds, cornerRadius: self.shotCornerView.layer.cornerRadius).CGPath
+                                self.shotCornerView.layer.shadowPath = UIBezierPath(roundedRect: self.shotCornerView.bounds, cornerRadius: self.shotCornerView.layer.cornerRadius).cgPath
                                 self.shotCornerView.layer.shouldRasterize = true
-                                self.shotCornerView.layer.rasterizationScale = UIScreen.mainScreen().scale
+                                self.shotCornerView.layer.rasterizationScale = UIScreen.main.scale
                                 //Add Corner Radius
                                 let borderView = UIView()
                                 borderView.frame = self.shotCornerView.bounds
@@ -170,33 +169,33 @@ class ShotDetailAlternativeViewController: UIViewController {
                                 borderView.addSubview(self.shotImageFront)
                                 
                                 //Setup the back shot Image with blur effect
-                                self.shotImageBack.sd_setImageWithURL(url!)
-                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                self.shotImageBack.sd_setImage(with: url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
                                 let blurEffectView = UIVisualEffectView(effect: blurEffect)
                                 blurEffectView.frame = self.shotImageBack.bounds
-                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                                 self.shotImageBack.addSubview(blurEffectView)
                             }
-                        }else if let urlString = self.shot?["images"]!["normal"].string where urlString.characters.count > 0{
-                            let url = NSURL(string: urlString)
-                            if let data = NSData(contentsOfURL: url!) {
+                        }else if let urlString = self.shot?["images"]!["normal"].string, urlString.characters.count > 0{
+                            let url = URL(string: urlString)
+                            if let data = try? Data(contentsOf: url!) {
                                 //Setup the front shot Image
-                                self.shotImageFront.animateWithImageData(data)
+                                self.shotImageFront.animate(withGIFData: data)
                                 self.shotCornerView.layer.cornerRadius = 10
                                 self.shotCornerView.clipsToBounds = true
-                                self.shotCornerView.layer.shadowPath = UIBezierPath(roundedRect: self.shotCornerView.bounds, cornerRadius: self.shotCornerView.layer.cornerRadius).CGPath
-                                self.shotCornerView.layer.shadowColor = UIColor.blackColor().CGColor
+                                self.shotCornerView.layer.shadowPath = UIBezierPath(roundedRect: self.shotCornerView.bounds, cornerRadius: self.shotCornerView.layer.cornerRadius).cgPath
+                                self.shotCornerView.layer.shadowColor = UIColor.black.cgColor
                                 self.shotCornerView.layer.shadowOpacity = 0.9
-                                self.shotCornerView.layer.shadowOffset = CGSizeMake(0, 5)
+                                self.shotCornerView.layer.shadowOffset = CGSize(width: 0, height: 5)
                                 self.shotCornerView.layer.shadowRadius = 5
                                 self.shotCornerView.layer.masksToBounds = false
                                 
                                 //Setup the back shot Image with blur effect
-                                self.shotImageBack.sd_setImageWithURL(url!)
-                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
+                                self.shotImageBack.sd_setImage(with: url!)
+                                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
                                 let blurEffectView = UIVisualEffectView(effect: blurEffect)
                                 blurEffectView.frame = self.shotImageBack.bounds
-                                blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                                 self.shotImageBack.addSubview(blurEffectView)
                             }
                         }
@@ -204,11 +203,11 @@ class ShotDetailAlternativeViewController: UIViewController {
                 }
                 
                 if let urlAvatar = self.shot?["user"]!["avatar_url"]{
-                    let url = NSURL(string: urlAvatar.stringValue)
-                    self.userAvatar.sd_setImageWithURL(url!)
+                    let url = URL(string: urlAvatar.stringValue)
+                    self.userAvatar.sd_setImage(with: url!)
                     self.userAvatar.layer.cornerRadius = self.userAvatar.frame.size.width/2
                     //self.userAvatar.layer.borderWidth = 2
-                    //self.userAvatar.layer.borderColor = UIColor(rgba: "#46454B").CGColor
+                    //self.userAvatar.layer.borderColor = UIColor("#46454B").CGColor
                     self.userAvatar.clipsToBounds = true
                 }
                 

@@ -13,12 +13,12 @@ class ImageViewController: UIViewController {
 
     @IBOutlet weak var shotImageView: UIImageView!
     
-    var shotURL: NSURL!
+    var shotURL: URL!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.shotImageView.hnk_setImageFromURL(shotURL!)
+        self.shotImageView.hnk_setImage(from: shotURL!)
 
         // Do any additional setup after loading the view.
     }

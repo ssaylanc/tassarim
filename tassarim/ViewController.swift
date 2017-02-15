@@ -21,7 +21,7 @@ class ViewController: OAuthViewController {
     @IBOutlet weak var logoWidth: NSLayoutConstraint!
     @IBOutlet weak var logoBottom: NSLayoutConstraint!
     @IBOutlet weak var logoHeight: NSLayoutConstraint!
-    @IBAction func signInButtonDidTouch(sender: AnyObject) {
+    @IBAction func signInButtonDidTouch(_ sender: AnyObject) {
         doOAuthDribbble()
     }
     
@@ -32,7 +32,7 @@ class ViewController: OAuthViewController {
         #if os(OSX)
             controller.view = NSView(frame: NSRect(x:0, y:0, width: 450, height: 500)) // needed if no nib or not loaded from storyboard
         #elseif os(iOS)
-            controller.view = UIView(frame: UIScreen.mainScreen().bounds) // needed if no nib or not loaded from storyboard
+            controller.view = UIView(frame: UIScreen.main.bounds) // needed if no nib or not loaded from storyboard
         #endif
         controller.delegate = self
         controller.viewDidLoad()
@@ -71,40 +71,40 @@ extension ViewController {
     
     // MARK: Dribbble
     func doOAuthDribbble(){
-        let state: String = generateStateWithLength(20) as String
+        let state: String = generateState(withLength: 20)
         let oauthswift = OAuth2Swift(
-            consumerKey:    "your Consumer Key",
-            consumerSecret: "your Consumer Secret",
+            consumerKey:    "4cf827eca84b70b9edbcbc053f28ee93f517fbd8e26cc52038950a593f69262b",
+            consumerSecret: "dd240ac0423d35d8177710fadd9acbb434021734d88bad65e7284ed667bb0282",
             authorizeUrl:   "https://dribbble.com/oauth/authorize",
             accessTokenUrl: "https://dribbble.com/oauth/token",
             responseType:   "code"
         )
         self.oauthswift = oauthswift
-        oauthswift.authorize_url_handler = get_url_handler()
-        oauthswift.authorizeWithCallbackURL( NSURL(string: "your URL")!, scope: "public+write", state: state, success: {
-            credential, response, parameters in
-            KeychainHelper.save ("dribbble_access_token", data: KeychainHelper.stringToNSDATA(credential.oauth_token) )
-            self.internalWebViewController.dismissViewControllerAnimated(false, completion: nil)
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-                self.performSegueWithIdentifier("SignedInSegue", sender: self)
-            }
-            
-            }, failure: {(error:NSError!) -> Void in
-                print(error.localizedDescription)
-
+        oauthswift.authorizeURLHandler = get_url_handler()
+        let _ = oauthswift.authorize(
+            withCallbackURL: URL(string: "tassarim://oauth")!, scope: "public+write", state:state,
+            success: { credential, response, parameters in
+                KeychainHelper.save ("dribbble_access_token", data: KeychainHelper.stringToNSDATA(credential.oauthToken) )
+                
+                DispatchQueue.main.async() { [unowned self] in
+                    self.performSegue(withIdentifier: "SignedInSegue", sender: self)
+                }
+        },
+            failure: { error in
+                print(error.description)
         })
     }
 }
 
-let DocumentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-let FileManager: NSFileManager = NSFileManager.defaultManager()
+let DocumentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+let FileManager: Foundation.FileManager = Foundation.FileManager.default
 
 extension ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("sedar\(UIDevice().type)")
-        switch UIDevice().type {
+        print("sedar\(UIDevice().modelName)")
+        switch UIDevice().modelName {
         case .iPhone4:
             self.logoWidth.constant = 100
             self.logoHeight.constant = 100
@@ -121,16 +121,16 @@ extension ViewController {
             
         }
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.isTranslucent = true
         // init now web view handler
         internalWebViewController.webView
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let data = KeychainHelper.load("dribbble_access_token")
         var token: String = ""
@@ -144,7 +144,7 @@ extension ViewController {
             //self.doOAuthDribbble()
         }
         else {
-            self.performSegueWithIdentifier("SignedInSegue", sender: self)
+            self.performSegue(withIdentifier: "SignedInSegue", sender: self)
             /*let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
              let shotsVC = mainStoryBoard.instantiateViewControllerWithIdentifier("ShotsVC")
              self.presentViewController(shotsVC, animated: true, completion: nil)*/
@@ -156,9 +156,9 @@ extension ViewController {
     
     var confPath: String {
         let appPath = "\(DocumentDirectory)/.oauth/"
-        if !FileManager.fileExistsAtPath(appPath) {
+        if !FileManager.fileExists(atPath: appPath) {
             do {
-                try FileManager.createDirectoryAtPath(appPath, withIntermediateDirectories: false, attributes: nil)
+                try FileManager.createDirectory(atPath: appPath, withIntermediateDirectories: false, attributes: nil)
             }catch {
                 print("Failed to create \(appPath)")
             }
@@ -166,14 +166,14 @@ extension ViewController {
         return "\(appPath)Services.plist"
     }
     
-    func snapshot() -> NSData {
+    func snapshot() -> Data {
         #if os(iOS)
             UIGraphicsBeginImageContext(self.view.frame.size)
-            self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+            self.view.layer.render(in: UIGraphicsGetCurrentContext()!)
             let fullScreenshot = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            UIImageWriteToSavedPhotosAlbum(fullScreenshot, nil, nil, nil)
-            return  UIImageJPEGRepresentation(fullScreenshot, 0.5)!
+            UIImageWriteToSavedPhotosAlbum(fullScreenshot!, nil, nil, nil)
+            return  UIImageJPEGRepresentation(fullScreenshot!, 0.5)!
         #elseif os(OSX)
             let rep: NSBitmapImageRep = self.view.bitmapImageRepForCachingDisplayInRect(self.view.bounds)!
             self.view.cacheDisplayInRect(self.view.bounds, toBitmapImageRep:rep)
@@ -181,11 +181,11 @@ extension ViewController {
         #endif
     }
     
-    func showAlertView(title: String, message: String) {
+    func showAlertView(_ title: String, message: String) {
         #if os(iOS)
-            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         #elseif os(OSX)
             let alert = NSAlert()
             alert.messageText = title
@@ -195,10 +195,10 @@ extension ViewController {
         #endif
     }
     
-    func showTokenAlert(name: String?, credential: OAuthSwiftCredential) {
-        var message = "oauth_token:\(credential.oauth_token)"
-        if !credential.oauth_token_secret.isEmpty {
-            message += "\n\noauth_toke_secret:\(credential.oauth_token_secret)"
+    func showTokenAlert(_ name: String?, credential: OAuthSwiftCredential) {
+        var message = "oauth_token:\(credential.oauthToken)"
+        if !credential.oauthTokenSecret.isEmpty {
+            message += "\n\noauth_toke_secret:\(credential.oauthTokenSecret)"
         }
         self.showAlertView(name ?? "Service", message: message)
     }
@@ -256,18 +256,18 @@ extension ViewController {
     
     // Little class to dispatch async (could use framework like Eki or swift 3 DispatchQueue)
     enum Queue {
-        case Main, Background
+        case main, background
         
-        var queue: dispatch_queue_t {
+        var queue: DispatchQueue {
             switch self {
-            case .Main:
-                return dispatch_get_main_queue()
-            case .Background:
-                return dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)
+            case .main:
+                return DispatchQueue.main
+            case .background:
+                return DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
             }
         }
-        func async(block: () -> Void) {
-            dispatch_async(self.queue) {
+        func async(_ block: @escaping () -> Void) {
+            self.queue.async {
                 block()
             }
         }
@@ -305,20 +305,20 @@ extension ViewController {
 
 // Little utility class to wait on data
 class Semaphore<T> {
-    let segueSemaphore = dispatch_semaphore_create(0)
+    let segueSemaphore = DispatchSemaphore(value: 0)
     var data: T?
     
-    func waitData(timeout: dispatch_time_t = DISPATCH_TIME_FOREVER) -> T? {
-        dispatch_semaphore_wait(segueSemaphore, timeout) // wait user
+    func waitData(_ timeout: DispatchTime = DispatchTime.distantFuture) -> T? {
+        segueSemaphore.wait(timeout: timeout) // wait user
         return data
     }
     
-    func publish(data: T) {
+    func publish(_ data: T) {
         self.data = data
-        dispatch_semaphore_signal(segueSemaphore)
+        segueSemaphore.signal()
     }
     
     func cancel() {
-        dispatch_semaphore_signal(segueSemaphore)
+        segueSemaphore.signal()
     }
 }

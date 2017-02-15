@@ -48,7 +48,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
 
     func setupShot(){
          if let urlString = self.shot?["shot"]["images"]["teaser"]{
-            self.shotImage.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+            self.shotImage.sd_setImage(with: URL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
         }
         self.shotImage.layer.cornerRadius = 5
         self.shotImage.clipsToBounds = true
@@ -58,10 +58,10 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         self.typeView.layer.cornerRadius = 8
         self.typeView.clipsToBounds = true
         self.typeView.layer.borderWidth = 1
-        self.typeView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.typeView.layer.borderColor = UIColor.white.cgColor
         
         if let urlString = self.follower?["follower"]["avatar_url"]{
-            self.avatarImageView.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+            self.avatarImageView.sd_setImage(with: URL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
             self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.width/2
             self.avatarImageView.clipsToBounds = true
         }
@@ -76,18 +76,18 @@ class ProfileCollectionViewCell: UICollectionViewCell {
                 if let pro = self.follower!["follower"]["pro"].bool {
                     if pro == true {
                         self.typeLabel.text = "Pro"
-                        //self.typeView.backgroundColor = UIColor(rgba: "#F45081")
-                        self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#798BF8"), UIColor(rgba: "#798BF8")])
+                        //self.typeView.backgroundColor = UIColor("#F45081")
+                        self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#798BF8"), UIColor("#798BF8")])
                     }else{
-                        self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#798BF8"), UIColor(rgba: "#798BF8")])
+                        self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#798BF8"), UIColor("#798BF8")])
                         self.typeLabel.text = ""
                     }
                 }
             }else if type == "Team" {
                 self.typeLabel.text = "Team"
-                self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#FFC27E"), UIColor(rgba: "#FFC27E")])
+                self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#FFC27E"), UIColor("#FFC27E")])
             }else {
-                self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#FFC27E"), UIColor(rgba: "#FFC27E")])
+                self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#FFC27E"), UIColor("#FFC27E")])
                 self.typeLabel.text = ""
             }
         }
@@ -98,13 +98,13 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         self.typeView.layer.cornerRadius = 8
         self.typeView.clipsToBounds = true
         self.typeView.layer.borderWidth = 1
-        self.typeView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.typeView.layer.borderColor = UIColor.white.cgColor
         
         if let urlString = self.followee?["followee"]["avatar_url"]{
-            self.avatarImageView.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+            self.avatarImageView.sd_setImage(with: URL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
             self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.width/2
             self.avatarImageView.clipsToBounds = true
-            self.avatarImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            self.avatarImageView.layer.borderColor = UIColor.white.cgColor
             self.avatarImageView.layer.borderWidth = 2
         }
         if let userName = self.followee!["followee"]["username"].string {
@@ -119,21 +119,21 @@ class ProfileCollectionViewCell: UICollectionViewCell {
                 if let pro = self.followee!["followee"]["pro"].bool {
                     if pro == true {
                         self.typeLabel.text = "Pro"
-                        //self.typeView.backgroundColor = UIColor(rgba: "#F45081")
-                        self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#798BF8"), UIColor(rgba: "#798BF8")])
+                        //self.typeView.backgroundColor = UIColor("#F45081")
+                        self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#798BF8"), UIColor("#798BF8")])
                     }else{
-                        self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#798BF8"), UIColor(rgba: "#798BF8")])
+                        self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#798BF8"), UIColor("#798BF8")])
                         self.typeLabel.text = ""
                     }
                 }
             }else if type == "Team" {
                 self.typeLabel.text = "Team"
-                //self.typeView.backgroundColor = UIColor(rgba: "#37C1FF")
-                //self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#7EDFB2"), UIColor(rgba: "#7EDFB2")])
-                self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#FFC27E"), UIColor(rgba: "#FFC27E")])
+                //self.typeView.backgroundColor = UIColor("#37C1FF")
+                //self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor("#7EDFB2"), UIColor("#7EDFB2")])
+                self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#FFC27E"), UIColor("#FFC27E")])
                 //self.typeViewWidth.constant = 35
             }else {
-                self.typeView.backgroundColor = GradientColor(.LeftToRight, frame: self.typeView.frame, colors: [UIColor(rgba: "#FFC27E"), UIColor(rgba: "#FFC27E")])
+                self.typeView.backgroundColor = GradientColor(gradientStyle: .leftToRight, frame: self.typeView.frame, colors: [UIColor("#FFC27E"), UIColor("#FFC27E")])
                 self.typeLabel.text = ""
             }
         }

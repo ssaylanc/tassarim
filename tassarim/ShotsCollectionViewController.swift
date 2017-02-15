@@ -27,14 +27,14 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
     var myView : UIView!
     var firstTimeLoad: Bool! = true
     
-    private func addActivityIndicator() {
+    fileprivate func addActivityIndicator() {
         let frame = CGRect(x: collectionView!.center.x - 40 / 2, y: collectionView!.center.y - 20, width: 40, height: 40)
-        let activityType = NVActivityIndicatorType.LineScale
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.whiteColor())
+        let activityType = NVActivityIndicatorType.lineScale
+        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.white)
         if self.firstTimeLoad == true {
             myView = UIView(frame: CGRect(x: 0, y: 0, width: collectionView!.frame.width, height: collectionView!.frame.height))
             self.view.addSubview(myView)
-            myView.backgroundColor = UIColor(rgba: "#F45081")
+            myView.backgroundColor = UIColor("#F45081")
             view.addSubview(myView)
             if let activityIndicatorView = activityIndicatorView {
                 myView.addSubview(activityIndicatorView)
@@ -51,14 +51,14 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
         isShotsLoading = true
         if let indicator = activityIndicatorView {
             indicator.startAnimating()
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
         }
     }
     
     func stopActivityIndicatorView() {
         if let indicator = activityIndicatorView {
-            UIView.animateWithDuration(
-                0.6,
+            UIView.animate(
+                withDuration: 0.6,
                 delay: 0.1,
                 usingSpringWithDamping: 0.7,
                 initialSpringVelocity: 0.0,
@@ -70,7 +70,7 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
                     self.view.layoutIfNeeded()
                 }, completion: { _ in
                     indicator.stopAnimating()
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.myView.removeFromSuperview()
                     indicator.removeFromSuperview()
             })
@@ -78,11 +78,11 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
         isShotsLoading = false
     }
     
-    func loadShots(list_name: String, page: Int = 1) {
+    func loadShots(_ list_name: String, page: Int = 1) {
         self.firstTimeLoad = false
         DribbbleAPI.sharedInstance.loadShots(list_name, page: page, callback: { (shots) in
             if let data = shots.arrayValue as [JSON]?{
-                self.shots?.appendContentsOf(data)
+                self.shots?.append(contentsOf: data)
                 self.collectionView?.reloadData()
                 self.stopActivityIndicatorView()
             }
@@ -91,10 +91,10 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
     
     func openProfile(){
         if DribbbleAPI.sharedInstance.isAuthenticated(){
-            performSegueWithIdentifier("openProfileSegue", sender: self)
+            performSegue(withIdentifier: "openProfileSegue", sender: self)
             GAnalytics.sharedInstance.trackAction("BUTTON", action: "openProfileSegue", label: "openProfileSegue", value: 1)
         }else{
-            performSegueWithIdentifier("SignInSegue", sender: self)
+            performSegue(withIdentifier: "SignInSegue", sender: self)
              GAnalytics.sharedInstance.trackAction("BUTTON", action: "SignInSegue", label: "SignInSegue", value: 1)
         }
     }
@@ -102,14 +102,14 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         //remove hairline under the navbar
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         //if DribbbleAPI.sharedInstance.isAuthenticated(){
             let button = UIButton()
-            button.frame = CGRectMake(0, 0, 20, 20)
-            button.setImage(UIImage(named: "des-pen-pot"), forState: .Normal)
-            button.addTarget(self, action: #selector(ShotsCollectionViewController.openProfile), forControlEvents: UIControlEvents.TouchUpInside)
+            button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+            button.setImage(UIImage(named: "des-pen-pot"), for: UIControlState())
+            button.addTarget(self, action: #selector(ShotsCollectionViewController.openProfile), for: UIControlEvents.touchUpInside)
             let barButton = UIBarButtonItem()
             barButton.customView = button
             self.navigationItem.rightBarButtonItem = barButton
@@ -119,11 +119,11 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
             dropDownItems = ["popular", "following", "animated", "attachments", "debuts", "playoffs", "rebounds", "teams"]
         }
         
-        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Shots", items: dropDownItems)
+        let menuView = BTNavigationDropdownMenu(navigationController: self.navigationController, containerView: self.navigationController!.view, title: "Shots", items: dropDownItems as [AnyObject])
         
         menuView.cellSeparatorColor = UIColorFromRGB(0xF45081)
-        menuView.cellTextLabelAlignment = .Center
-        menuView.cellSelectionColor = UIColor.whiteColor()
+        menuView.cellTextLabelAlignment = .center
+        menuView.cellSelectionColor = UIColor.white
         
         self.navigationItem.titleView = menuView
         
@@ -133,10 +133,10 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
             if self.list_name == "following" {
                 self.firstTimeLoad = true
                 self.startActivityIndicatorView()
-                self.shots?.removeAll(keepCapacity: false)
+                self.shots?.removeAll(keepingCapacity: false)
                 DribbbleAPI.sharedInstance.loadUserFollowingShots { (followingShots) in
                     if let data = followingShots.arrayValue as [JSON]? {
-                        self.shots?.appendContentsOf(data)
+                        self.shots?.append(contentsOf: data)
                         self.collectionView?.reloadData()
                         self.stopActivityIndicatorView()
                     }
@@ -144,7 +144,7 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
             }else{
                 self.firstTimeLoad = true
                 self.startActivityIndicatorView()
-                self.shots?.removeAll(keepCapacity: false)
+                self.shots?.removeAll(keepingCapacity: false)
                 self.loadShots(self.list_name)
             }
         }
@@ -152,23 +152,23 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
         self.loadShots(list_name)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.navigationBar.barTintColor = UIColor(rgba: "#F45081")
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController!.navigationBar.barTintColor = UIColor("#F45081")
+        self.navigationController?.navigationBar.isTranslucent = false
         GAnalytics.sharedInstance.sendScreenTracking("ShotsView")
     }
     // MARK: UICollectionViewDataSource
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        return self.shots?.count ?? 0
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ShotsCollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ShotsCollectionViewCell
         cell.shot = self.shots?[indexPath.row]
         
         /*if (indexPath.row == self.shots!.count - 6) {
@@ -187,30 +187,30 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(collectionView.frame.width/3, collectionView.frame.width/3)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/3, height: collectionView.frame.width/3)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
     // remove lines between cells
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
         
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("ShotDetailSegue", sender: indexPath)
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShotDetailSegue", sender: indexPath)
+        collectionView.deselectItem(at: indexPath, animated: true)
         GAnalytics.sharedInstance.trackAction("CELL", action: "CELL SELECT", label: "\(self.shots?[indexPath.row]["id"].int)", value: 1)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShotDetailSegue"{
-            let toView = segue.destinationViewController as! ShotDetailViewController
-            let indexPath = sender as! NSIndexPath
+            let toView = segue.destination as! ShotDetailViewController
+            let indexPath = sender as! IndexPath
             guard let shotID = self.shots?[indexPath.row]["id"].int! else {return}
             toView.shotID = shotID
         }

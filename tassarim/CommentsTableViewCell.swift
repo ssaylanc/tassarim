@@ -47,12 +47,12 @@ class CommentsTableViewCell: UITableViewCell {
         
         if let imageURL = self.comments?["user"]["avatar_url"] {
             //let url = NSURL(string: imageURL.stringValue)
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 //self.userAvatarImage.hnk_setImageFromURL(url!)
-                self.userAvatarImage.sd_setImageWithURL(NSURL(string: imageURL.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+                self.userAvatarImage.sd_setImage(with: URL(string: imageURL.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
                 self.userAvatarImage.layer.cornerRadius = self.userAvatarImage.frame.size.width/2
                 self.userAvatarImage.layer.borderWidth = 2
-                self.userAvatarImage.layer.borderColor = UIColor.whiteColor().CGColor
+                self.userAvatarImage.layer.borderColor = UIColor.white.cgColor
                 self.userAvatarImage.clipsToBounds = true
             })
         }
@@ -60,11 +60,11 @@ class CommentsTableViewCell: UITableViewCell {
         if let tLabel = self.comments?["body"].string {
             //http://stackoverflow.com/questions/25879837/how-to-display-html-formatted-text-in-ios-label
             let attrStr = try! NSAttributedString(
-                data: tLabel.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,
+                data: tLabel.data(using: String.Encoding.unicode, allowLossyConversion: true)!,
                 options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
                 documentAttributes: nil)
             self.commentLabel.attributedText = attrStr
-            self.commentLabel.font = commentLabel.font.fontWithSize(16)
+            self.commentLabel.font = commentLabel.font.withSize(16)
         }else {
             self.commentLabel.text = "Başlık Alınamadı"
         }

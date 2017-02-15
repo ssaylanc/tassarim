@@ -21,16 +21,16 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var textFieldBottom: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var commentTextField: UITextField!
-    @IBAction func sendButtonDidTouch(sender: AnyObject) {
+    @IBAction func sendButtonDidTouch(_ sender: AnyObject) {
     }
-    private func addActivityIndicator() {
+    fileprivate func addActivityIndicator() {
         let frame = CGRect(x: tableView!.center.x - 40 / 2, y: tableView!.center.y - 20, width: 40, height: 40)
-        let activityType = NVActivityIndicatorType.LineScale
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.blackColor())
+        let activityType = NVActivityIndicatorType.lineScale
+        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: activityType, color: UIColor.black)
         
         if let activityIndicatorView = activityIndicatorView {
             view.addSubview(activityIndicatorView)
-            self.tableView!.separatorStyle = .None
+            self.tableView!.separatorStyle = .none
         }
     }
     
@@ -43,8 +43,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func stopActivityIndicatorView() {
         if let indicator = activityIndicatorView {
-            UIView.animateWithDuration(
-                0.6,
+            UIView.animate(
+                withDuration: 0.6,
                 delay: 0.1,
                 usingSpringWithDamping: 0.7,
                 initialSpringVelocity: 0.0,
@@ -57,17 +57,17 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                 }, completion: { _ in
                     indicator.stopAnimating()
                     indicator.removeFromSuperview()
-                    self.tableView!.separatorStyle = .SingleLine
+                    self.tableView!.separatorStyle = .singleLine
             })
         }
     }
 
-    @IBAction func designerButtonDidTouch(sender: AnyObject) {
-        let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
+    @IBAction func designerButtonDidTouch(_ sender: AnyObject) {
+        let indexPath = IndexPath(row: sender.tag, section: 0)
         if self.userType == "Team" {
-            performSegueWithIdentifier("TeamSegue", sender: indexPath)
+            performSegue(withIdentifier: "TeamSegue", sender: indexPath)
         }else if self.userType == "Player" {
-            performSegueWithIdentifier("UserSegue", sender: indexPath)
+            performSegue(withIdentifier: "UserSegue", sender: indexPath)
         }
     }
 
@@ -83,7 +83,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         GAnalytics.sharedInstance.sendScreenTracking("CommentsView, ID:\(shotID)")
     }
@@ -97,8 +97,8 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         /*let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CommentsViewController.DismissKeyboard))
         self.tableView.addGestureRecognizer(tap)*/
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CommentsViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentsViewController.keyboardWillShow(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CommentsViewController.keyboardWillHide(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func DismissKeyboard(){
@@ -106,7 +106,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
-    func keyboardWillShow(sender: NSNotification) {
+    func keyboardWillShow(_ sender: Notification) {
        /* //self.view.frame.origin.y = -150
         let info  = sender.userInfo!
         let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
@@ -128,35 +128,35 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
                                    completion: { _ in
             }
         )*/
-        if let keyboardSize = (sender.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        if let keyboardSize = (sender.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             self.textFieldBottom?.constant += keyboardSize.height
         }
         
     }
     
-    func keyboardWillHide(sender: NSNotification) {
+    func keyboardWillHide(_ sender: Notification) {
         //self.view.frame.origin.y = 0
-        if let keyboardSize = (sender.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        if let keyboardSize = (sender.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             self.textFieldBottom?.constant = 0
         }    }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.comments?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell", forIndexPath: indexPath) as! CommentsTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentsTableViewCell
         let type = self.comments?[indexPath.row]["user"]["type"]
         self.userType = type?.string
         cell.comments = self.comments?[indexPath.row]
         cell.designerButton.tag = indexPath.row
         return cell
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

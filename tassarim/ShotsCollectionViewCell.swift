@@ -16,7 +16,7 @@ class ShotsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var shotImage: UIImageView!
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var viewCountLabel: UILabel!
-    @IBOutlet weak var gifView: AnimatableImageView!
+    @IBOutlet weak var gifView: GIFImageView!
     @IBOutlet weak var gifLabel: UIImageView!
     
     var shot:SwiftyJSON.JSON?{
@@ -42,7 +42,7 @@ class ShotsCollectionViewCell: UICollectionViewCell {
             }*/
 
             //self.shotImage.hnk_setImageFromURL(url!)
-            self.shotImage.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+            self.shotImage.sd_setImage(with: URL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
             self.shotImage.layer.cornerRadius = 5
             self.shotImage.clipsToBounds = true
             /*self.shotImage.hnk_setImageFromURL(url!, placeholder: UIImage(named: ""), success: { (image) -> Void in
@@ -58,10 +58,10 @@ class ShotsCollectionViewCell: UICollectionViewCell {
         }
         if let isAnimated = self.shot?["animated"] {
             let aBool = isAnimated
-            if aBool {
-                self.gifLabel.hidden = false
+            if aBool.boolValue {
+                self.gifLabel.isHidden = false
             }else{
-                self.gifLabel.hidden = true
+                self.gifLabel.isHidden = true
             }
         }
         /*
@@ -78,7 +78,7 @@ class ShotsCollectionViewCell: UICollectionViewCell {
     func setupProjects() {
         if let urlString = self.projects?["covers"]["202"]{
             print("serdar:\(urlString)")
-            self.shotImage.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+            self.shotImage.sd_setImage(with: URL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
             self.shotImage.layer.cornerRadius = 5
             self.shotImage.clipsToBounds = true
         }

@@ -12,19 +12,19 @@ class LaunchScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.prefersStatusBarHidden()
+        self.prefersStatusBarHidden
         
-        if self.respondsToSelector(#selector(UIViewController.setNeedsStatusBarAppearanceUpdate)) {
+        if self.responds(to: #selector(UIViewController.setNeedsStatusBarAppearanceUpdate)) {
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
 

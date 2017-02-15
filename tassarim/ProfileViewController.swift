@@ -25,40 +25,40 @@ class ProfileViewController: UIViewController/*, UICollectionViewDataSource, UIC
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var webAddrView: UIView!
     @IBOutlet weak var webAddressLabel: UILabel!
-    @IBAction func webButtonDidTouch(sender: AnyObject) {
+    @IBAction func webButtonDidTouch(_ sender: AnyObject) {
     }
     
     @IBOutlet weak var twitterView: UIView!
     @IBOutlet weak var twitterLabel: UILabel!
-    @IBAction func twitterButtonDidTouch(sender: AnyObject) {
+    @IBAction func twitterButtonDidTouch(_ sender: AnyObject) {
     }
     
     @IBOutlet weak var twitterButtonDidTouch: UIButton!
-    @IBAction func logoutButtonDidTouch(sender: AnyObject) {
+    @IBAction func logoutButtonDidTouch(_ sender: AnyObject) {
         if data != nil {
             KeychainHelper.delete("dribbble_access_token")
             let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let shotsVC = mainStoryBoard.instantiateViewControllerWithIdentifier("MainVC")
-            self.presentViewController(shotsVC, animated: true, completion: nil)
+            let shotsVC = mainStoryBoard.instantiateViewController(withIdentifier: "MainVC")
+            self.present(shotsVC, animated: true, completion: nil)
         }else{
         print("text")
         }
     }
-    @IBAction func followingButtonDidTouch(sender: AnyObject) {
+    @IBAction func followingButtonDidTouch(_ sender: AnyObject) {
     }
-    @IBAction func followersButtonDidTouch(sender: AnyObject) {
+    @IBAction func followersButtonDidTouch(_ sender: AnyObject) {
     }
-    @IBAction func likesButtonDidTouch(sender: AnyObject) {
+    @IBAction func likesButtonDidTouch(_ sender: AnyObject) {
     }
     @IBOutlet weak var bucketsButtonDidTouch: UIButton!
     
     var user: [String:JSON]? = [:]
     var following: [JSON]? = []
     var followers: [JSON]? = []
-    var data: NSData!
+    var data: Data!
     var token: String = ""
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         data = KeychainHelper.load("dribbble_access_token")
         
@@ -85,7 +85,7 @@ class ProfileViewController: UIViewController/*, UICollectionViewDataSource, UIC
         
         self.profileView.layer.cornerRadius = 10
         //self.profileView.clipsToBounds = true
-        self.profileView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.profileView.layer.shadowColor = UIColor.black.cgColor
         self.profileView.layer.shadowOpacity = 0.2
         self.profileView.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.profileView.layer.shadowRadius = 2
@@ -93,8 +93,8 @@ class ProfileViewController: UIViewController/*, UICollectionViewDataSource, UIC
             if let data = user.dictionaryValue as [String:JSON]?{
                 self.user = data
                 if let urlAvatar = self.user?["avatar_url"]{
-                    let url = NSURL(string: urlAvatar.stringValue)
-                    self.avatarImage.hnk_setImageFromURL(url!)
+                    let url = URL(string: urlAvatar.stringValue)
+                    self.avatarImage.hnk_setImage(from: url!)
                     self.avatarImage.layer.cornerRadius = 30
                     self.avatarImage.clipsToBounds = true
                 }

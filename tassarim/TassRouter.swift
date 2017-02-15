@@ -6,15 +6,15 @@
 //  Copyright © 2016 saylanc. All rights reserved.
 //
 
-import Foundation
+/*import Foundation
 import Alamofire
 
 enum TassRouter: URLRequestConvertible {
     static let baseURLString = "https://api.dribbble.com/v1/"
     
-    case Get(Int)
-    case Create([String: AnyObject])
-    case Delete(Int)
+    case get(Int)
+    case create([String: AnyObject])
+    case delete(Int)
     /*case
     case LoadAuthUSer()
     case isAuthenticated()
@@ -26,45 +26,45 @@ enum TassRouter: URLRequestConvertible {
     var URLRequest: NSMutableURLRequest {
         var method: Alamofire.Method {
             switch self {
-            case .Get:
+            case .get:
                 return .GET
-            case .Create:
+            case .create:
                 return .POST
-            case .Delete:
+            case .delete:
                 return .DELETE
             //case .LoadAuthUSer():
              //   return .GET
             }
         }
-        let url:NSURL = {
+        let url:URL = {
             // build up and return the URL for each endpoint
             let relativePath:String?
             switch self {
-            case .Get(let postNumber):
+            case .get(let postNumber):
                 relativePath = "posts/\(postNumber)"
-            case .Create:
+            case .create:
                 relativePath = "posts"
-            case .Delete(let postNumber):
+            case .delete(let postNumber):
                 relativePath = "posts/\(postNumber)"
             }
             
-            var URL = NSURL(string: TassRouter.baseURLString)!
+            var URL = Foundation.URL(string: TassRouter.baseURLString)!
             if let relativePath = relativePath {
-                URL = URL.URLByAppendingPathComponent(relativePath)
+                URL = URL.appendingPathComponent(relativePath)
             }
             return URL
         }()
         
         let params: ([String: AnyObject]?) = {
             switch self {
-            case .Get, .Delete:
+            case .delete:
                 return (nil)
-            case .Create(let newPost):
+            case .create(let newPost):
                 return (newPost)
             }
         }()
         
-        let URLRequest = NSMutableURLRequest(URL: url)
+        let URLRequest = NSMutableURLRequest(url: url)
         
         let encoding = Alamofire.ParameterEncoding.JSON
         let (encodedRequest, _) = encoding.encode(URLRequest, parameters: params)
@@ -73,4 +73,4 @@ enum TassRouter: URLRequestConvertible {
         
         return encodedRequest
     }
-}
+}*/

@@ -26,7 +26,7 @@ class WebViewController: OAuthWebViewController {
         super.viewDidLoad()
         
         #if os(iOS)
-            self.webView.frame = UIScreen.mainScreen().bounds
+            self.webView.frame = UIScreen.main.bounds
             self.webView.scalesPageToFit = true
             self.webView.delegate = self
             self.view.addSubview(self.webView)
@@ -42,15 +42,15 @@ class WebViewController: OAuthWebViewController {
         #endif
     }
     
-    override func handle(url: NSURL) {
-        targetURL = url
+    override func handle(_ url: URL) {
+        targetURL = url as NSURL
         super.handle(url)
         
         loadAddressURL()
     }
     
     func loadAddressURL() {
-        let req = NSURLRequest(URL: targetURL)
+        let req = URLRequest(url: targetURL as URL)
         self.webView.loadRequest(req)
     }
 }
@@ -58,8 +58,8 @@ class WebViewController: OAuthWebViewController {
 // MARK: delegate
 #if os(iOS)
     extension WebViewController: UIWebViewDelegate {
-        func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-            if let url = request.URL where (url.scheme == "tassarim://oauth"){
+        func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+            if let url = request.url, (url.scheme == "tassarim://oauth"){
                 // Call here AppDelegate.sharedInstance.applicationHandleOpenURL(url) if necessary ie. if AppDelegate not configured to handle URL scheme
                 // compare the url with your own custom provided one in `authorizeWithCallbackURL`
                 self.dismissWebViewController()
@@ -74,7 +74,7 @@ class WebViewController: OAuthWebViewController {
         func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
             
             // here we handle internally the callback url and call method that call handleOpenURL (not app scheme used)
-            if let url = navigationAction.request.URL where url.scheme == "oauth-swift" {
+            if let url = navigationAction.request.URL, url.scheme == "oauth-swift" {
                 AppDelegate.sharedInstance.applicationHandleOpenURL(url)
                 decisionHandler(.Cancel)
                 

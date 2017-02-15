@@ -40,7 +40,7 @@ class TeamCollectionViewCell: UICollectionViewCell {
         if let urlString = self.shot?["images"]["teaser"]{
             //let url = NSURL(string: urlString.stringValue)
             //self.shotImage.hnk_setImageFromURL(url!)
-            self.shotImage.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+            self.shotImage.sd_setImage(with: URL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
             /*for gif
              let data = NSData(contentsOfURL: url!)
              self.gifView.animateWithImageData(data!)
@@ -52,10 +52,10 @@ class TeamCollectionViewCell: UICollectionViewCell {
     
     func setupMembers() {
         if let urlString = self.members?["avatar_url"]{
-            self.memberAvatar.sd_setImageWithURL(NSURL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
+            self.memberAvatar.sd_setImage(with: URL(string: urlString.stringValue), placeholderImage:UIImage(contentsOfFile:"placeholder.png"))
             self.memberAvatar.layer.cornerRadius = 25
             self.memberAvatar.layer.borderWidth = 2
-            self.memberAvatar.layer.borderColor = UIColor.whiteColor().CGColor
+            self.memberAvatar.layer.borderColor = UIColor.white.cgColor
             self.memberAvatar.clipsToBounds = true
         }
     }
@@ -64,7 +64,7 @@ class TeamCollectionViewCell: UICollectionViewCell {
         self.projectNameLabel.text = self.projects?["name"].string
         //self.projectDescLabel.text = self.projects?["description"].string
         if let cInt = self.projects?["shots_count"] {
-            let cString = String(cInt)
+            let cString = String(describing: cInt)
             self.shotsCount.text = cString
         }
     }

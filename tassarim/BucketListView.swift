@@ -18,7 +18,7 @@ class BucketListView: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         self.bucketListTableView.dataSource = self
         self.bucketListTableView.delegate = self
-        self.bucketListTableView.separatorStyle = .None
+        self.bucketListTableView.separatorStyle = .none
         self.loadBucketList()
         
     }
@@ -31,19 +31,19 @@ class BucketListView: UIViewController, UITableViewDataSource, UITableViewDelega
              }
         }
     }
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.buckets?.count ?? 0
     }
     
     
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BucketCell", forIndexPath: indexPath) as! BucketListTableViewCell
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BucketCell", for: indexPath) as! BucketListTableViewCell
         
         cell.bucketNameLabel.text = self.buckets?[indexPath.row]["name"].string
         

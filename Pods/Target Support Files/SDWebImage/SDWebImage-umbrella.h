@@ -1,9 +1,9 @@
-#ifdef __OBJC__
 #import <UIKit/UIKit.h>
-#endif
 
 #import "NSData+ImageContentType.h"
+#import "NSImage+WebCache.h"
 #import "SDImageCache.h"
+#import "SDImageCacheConfig.h"
 #import "SDWebImageCompat.h"
 #import "SDWebImageDecoder.h"
 #import "SDWebImageDownloader.h"
@@ -16,6 +16,7 @@
 #import "UIImage+MultiFormat.h"
 #import "UIImageView+HighlightedWebCache.h"
 #import "UIImageView+WebCache.h"
+#import "UIView+WebCache.h"
 #import "UIView+WebCacheOperation.h"
 
 FOUNDATION_EXPORT double SDWebImageVersionNumber;

@@ -33,35 +33,35 @@ class DribbbleAPI {
         }
     }
     
-    func loadAuthUser(callback: (JSON) -> Void){
+    func loadAuthUser(_ callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/user"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 // got an error in getting the data, need to handle it
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let user = JSON(value)
                 callback(user)
             }
         }
     }
     
-    func loadTeamMembers(teamID: Int, callback: (JSON) -> Void){
+    func loadTeamMembers(_ teamID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let baseURL = "https://api.dribbble.com/v1/teams/\(teamID)/members"
-        let parameters: [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, baseURL, parameters: parameters).responseJSON { response in
+        let parameters: [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(baseURL, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let teamMembers = JSON(value)
                 callback(teamMembers)
             }
@@ -69,85 +69,85 @@ class DribbbleAPI {
     
     }
     
-    func loadUserFollowingShots(callback: (JSON) -> Void){
+    func loadUserFollowingShots(_ callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let baseURL = "https://api.dribbble.com/v1/user/following/shots"
-        let parameters: [String : AnyObject] = ["access_token": token, "per_page": 30, "page": 1]
-        Alamofire.request(.GET, baseURL, parameters: parameters).responseJSON { response in
+        let parameters: [String : AnyObject] = ["access_token": token as AnyObject, "per_page": 30 as AnyObject, "page": 1 as AnyObject]
+        Alamofire.request(baseURL, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shots = JSON(value)
                 callback(shots)
             }
         }
     }
     
-    func loadUserFollowers(callback: (JSON) -> Void){
+    func loadUserFollowers(_ callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let baseURL = "https://api.dribbble.com/v1/user/followers"
-        let parameters: [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, baseURL, parameters: parameters).responseJSON { response in
+        let parameters: [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(baseURL, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let followers = JSON(value)
                 callback(followers)
             }
         }
     }
     
-    func loadUserFollowing(callback: (JSON) -> Void){
+    func loadUserFollowing(_ callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let baseURL = "https://api.dribbble.com/v1/user/following"
-        let parameters: [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, baseURL, parameters: parameters).responseJSON { response in
+        let parameters: [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(baseURL, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let users = JSON(value)
                 callback(users)
             }
         }
     }
     
-    func loadUserLikes(callback: (JSON) -> Void){
+    func loadUserLikes(_ callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let baseURL = "https://api.dribbble.com/v1/user/likes"
-        let parameters: [String : AnyObject] = ["access_token": token, "per_page": 100]
-        Alamofire.request(.GET, baseURL, parameters: parameters).responseJSON { response in
+        let parameters: [String : AnyObject] = ["access_token": token as AnyObject, "per_page": 100 as AnyObject]
+        Alamofire.request(baseURL, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let likes = JSON(value)
                 callback(likes)
             }
         }
     }
 
-    func loadAuthUserShots(callback: (JSON) -> Void){
+    func loadAuthUserShots(_ callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let baseURL = "https://api.dribbble.com/v1/user/shots"
-        let parameters: [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, baseURL, parameters: parameters).responseJSON { response in
+        let parameters: [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(baseURL, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shots = JSON(value)
                 callback(shots)
             }
@@ -155,29 +155,29 @@ class DribbbleAPI {
     }
 
     
-    func loadShots (list_name: String, page: Int, shotsPerPage: Int = 42, callback: (JSON) -> Void){
+    func loadShots (_ list_name: String, page: Int, shotsPerPage: Int = 42, callback: @escaping (JSON) -> Void){
         //let baseURL = URList.shots_url + URList.url_token + URList.access_token + "&per_page=\(shotsPerPage)" + "&page=\(page)"
         self.isAuthenticated()
         let baseURL = "https://api.dribbble.com/v1/shots?"
-        let parameters : [String : AnyObject] = ["access_token": token, "per_page": shotsPerPage, "page": page, "list": list_name]
-        Alamofire.request(.GET, baseURL, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject, "per_page": shotsPerPage as AnyObject, "page": page as AnyObject, "list": list_name as AnyObject]
+        Alamofire.request(baseURL, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shots = JSON(value)
                 callback(shots)
             }
         }
     }
     
-    func loadShot(shotID: Int, callback: (JSON) -> Void) {
+    func loadShot(_ shotID: Int, callback: @escaping (JSON) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/shots/" + "\(shotID)"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
           /*  if !response.result.isFailure && !self.cacheResponse {
                 do {
                     let json = response.result.value
@@ -220,25 +220,25 @@ class DribbbleAPI {
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shot = JSON(value)
                 callback(shot)
             }
         }
     }
     
-    func loadAttachments(shotID: Int, callback: (JSON) -> Void){
+    func loadAttachments(_ shotID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/shots/" + "\(shotID)/attachments"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 // got an error in getting the data, need to handle it
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shot = JSON(value)
                 callback(shot)
             }
@@ -246,119 +246,119 @@ class DribbbleAPI {
     
     }
     
-    func loadComments (shotID: Int, callback: (JSON) -> Void) {
+    func loadComments (_ shotID: Int, callback: @escaping (JSON) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/shots/" + "\(shotID)/comments"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 // got an error in getting the data, need to handle it
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shots = JSON(value)
                 callback(shots)
             }
         }
     }
     
-    func loadUser (userID: Int, callback: (JSON) -> Void){
+    func loadUser (_ userID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/\(userID)?"
         //let url = "https://api.dribbble.com/v1/user/699467?"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 // got an error in getting the data, need to handle it
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let user = JSON(value)
                 callback(user)
             }
         }
     }
     
-    func loadProjects(userID: Int!, callback: (JSON) -> Void){
+    func loadProjects(_ userID: Int!, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/\(userID)/projects"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 // got an error in getting the data, need to handle it
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let projects = JSON(value)
                 callback(projects)
             }
         }
     }
     
-    func loadShotsofProject(projectID: Int!, callback: (JSON) -> Void){
+    func loadShotsofProject(_ projectID: Int!, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/projects/\(projectID)/shots"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 // got an error in getting the data, need to handle it
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shots = JSON(value)
                 callback(shots)
             }
         }
     }
     
-    func loadAuthProjects(userID: Int!, callback: (JSON) -> Void){
+    func loadAuthProjects(_ userID: Int!, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/projects"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 // got an error in getting the data, need to handle it
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let projects = JSON(value)
                 callback(projects)
             }
         }
     }
     
-    func loadUserShots(userID: Int, page: Int,  callback: (JSON) -> Void){
+    func loadUserShots(_ userID: Int, page: Int,  callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/\(userID)/shots?"
-        let parameters : [String : AnyObject] = ["access_token": token, "page": page, "per_page": 300]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject, "page": page as AnyObject, "per_page": 300 as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let userShots = JSON(value)
                 callback(userShots)
             }
         }
     }
     
-    func isLiked(shotID: Int, callback: (Bool) -> Void) {
+    func isLiked(_ shotID: Int, callback: @escaping (Bool) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/shots/\(shotID)/like"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             if response.response?.statusCode == 404 {
                 print("not liked")
                 callback(false)
@@ -369,11 +369,11 @@ class DribbbleAPI {
         }
     }
     
-    func likeAShot(shotID: Int, callback: (Bool) -> Void) {
+    func likeAShot(_ shotID: Int, callback: @escaping (Bool) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/shots/\(shotID)/like"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.POST, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 print("liked")
                 callback(true)
@@ -384,11 +384,11 @@ class DribbbleAPI {
         }
     }
     
-    func unlikeAShot(shotID: Int, callback: (Bool) -> Void) {
+    func unlikeAShot(_ shotID: Int, callback: @escaping (Bool) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/shots/\(shotID)/like"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.DELETE, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, method: .delete, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 print("unliked")
                 callback(true)
@@ -400,11 +400,11 @@ class DribbbleAPI {
     }
     
     //user follow actions
-    func isUserFollowed(userID: Int, callback: (Bool) -> Void) {
+    func isUserFollowed(_ userID: Int, callback: @escaping (Bool) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/user/following/\(userID)"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             if response.response?.statusCode == 204 {
                 print("following")
                 callback(true)
@@ -416,11 +416,11 @@ class DribbbleAPI {
         }
     }
     
-    func followUser(userID: Int, callback: (Bool) -> Void) {
+    func followUser(_ userID: Int, callback: @escaping (Bool) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/\(userID)/follow"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.PUT, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, method: .put, parameters: parameters).responseJSON { response in
             print(response.response?.statusCode)
             print(response.response)
             if response.response?.statusCode == 204 {
@@ -433,11 +433,11 @@ class DribbbleAPI {
         }
     }
     
-    func unFollowUser(userID: Int, callback: (Bool) -> Void) {
+    func unFollowUser(_ userID: Int, callback: @escaping (Bool) -> Void) {
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/\(userID)/follow"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.DELETE, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, method: .delete, parameters: parameters).responseJSON { response in
             if response.response?.statusCode == 204 {
                 print("unfollowed")
                 callback(true)
@@ -448,34 +448,34 @@ class DribbbleAPI {
         }
     }
     
-    func listFollowersOfAUser(userID: Int, callback: (JSON) -> Void){
+    func listFollowersOfAUser(_ userID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/\(userID)/followers"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let followers = JSON(value)
                 callback(followers)
             }
         }
     }
     
-    func listFollowersOfAuthUser(userID: Int, callback: (JSON) -> Void){
+    func listFollowersOfAuthUser(_ userID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/users/followers"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let followers = JSON(value)
                 callback(followers)
             }
@@ -483,17 +483,17 @@ class DribbbleAPI {
     }
     
     //buckets
-    func listBucketsOfShot(shotID: Int, callback: (JSON) -> Void){
+    func listBucketsOfShot(_ shotID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/shots/\(shotID)/buckets"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let buckets = JSON(value)
                 callback(buckets)
             }
@@ -501,17 +501,17 @@ class DribbbleAPI {
         
     }
     
-    func listShotsofBucket(bucketID: Int, callback: (JSON) -> Void){
+    func listShotsofBucket(_ bucketID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/buckets/\(bucketID)/shots"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let shots = JSON(value)
                 callback(shots)
             }
@@ -519,28 +519,28 @@ class DribbbleAPI {
         
     }
     
-    func getBucket(bucketID: Int, callback: (JSON) -> Void){
+    func getBucket(_ bucketID: Int, callback: @escaping (JSON) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/buckets/\(bucketID)"
-        let parameters : [String : AnyObject] = ["access_token": token]
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
+        Alamofire.request(url, parameters: parameters).responseJSON { response in
             guard response.result.error == nil else {
                 print("error calling GET on /posts/1")
                 print(response.result.error!)
                 return
             }
-            if let value: AnyObject = response.result.value {
+            if let value: AnyObject = response.result.value as AnyObject? {
                 let buckets = JSON(value)
                 callback(buckets)
             }
         }
     }
     
-    func updateBucket(bucketID: Int, shotID: Int, callback: (Bool) -> Void){
+    func updateBucket(_ bucketID: Int, shotID: Int, callback: @escaping (Bool) -> Void){
         self.isAuthenticated()
         let url = "https://api.dribbble.com/v1/buckets/\(bucketID)/shots"
-        let parameters : [String : AnyObject] = ["access_token": token, "shot_id": shotID]
-        Alamofire.request(.PUT, url, parameters: parameters).responseJSON { response in
+        let parameters : [String : AnyObject] = ["access_token": token as AnyObject, "shot_id": shotID as AnyObject]
+        Alamofire.request(url, method: .put, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 print(response.response?.statusCode)
                 print(response.response)
@@ -553,17 +553,17 @@ class DribbbleAPI {
         }
     }
     
-    func listUsersBuckets(callback: (JSON) -> Void){
+    func listUsersBuckets(_ callback: @escaping (JSON) -> Void){
         if isAuthenticated() {
-            let parameters : [String : AnyObject] = ["access_token": token]
+            let parameters : [String : AnyObject] = ["access_token": token as AnyObject]
             let url = "https://api.dribbble.com/v1//user/buckets"
-            Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+            Alamofire.request(url, parameters: parameters).responseJSON { response in
                 guard response.result.error == nil else {
                     print("error calling GET on /posts/1")
                     print(response.result.error!)
                     return
                 }
-                if let value: AnyObject = response.result.value {
+                if let value: AnyObject = response.result.value as AnyObject? {
                     let buckets = JSON(value)
                     callback(buckets)
                 }
